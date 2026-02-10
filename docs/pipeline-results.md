@@ -11,18 +11,186 @@
 
 All images are from the Epson EcoTank L3560 product listing. Each image was uploaded with a YAML sidecar containing product metadata, processed by the Phi-4 pipeline, and translated into four languages via Azure AI Translator.
 
-| Image | Pipeline Output |
-|:---:|---|
-| <img src="../assets/img_0.png" width="200" alt="img_0"> | <pre lang="json">{<br>  "asset": "img_0.png",<br>  "image": "img_0.png",<br>  "source": "public website",<br>  "altText": {<br>    "en": "Colorful Epson ink tank printer.",<br>    "jp": "カラフルなエプソンインクタンクプリンター。",<br>    "nl": "Kleurrijke Epson inkttankprinter.",<br>    "fr": "Imprimante Epson colorée pour réservoir d'encre."<br>  },<br>  "generatedAt": "2026-02-10T12:23:52+00:00"<br>}</pre> |
-| <img src="../assets/img_1.png" width="200" alt="img_1"> | <pre lang="json">{<br>  "altText": {<br>    "en": "Epson ink tank printer ecoTank L3560 a4 multifunction printer.",<br>    "jp": "エプソンのインクタンクプリンター、ecoTank L3560 a4、多機能プリンター。",<br>    "nl": "Epson inkttankprinter ecoTank L3560 a4 multifunctionele printer.",<br>    "fr": "Imprimante à réservoir d'encre Epson EcoTank L3560 A4 imprimante multifonction."<br>  }<br>}</pre> |
-| <img src="../assets/img_2.png" width="200" alt="img_2"> | <pre lang="json">{<br>  "altText": {<br>    "en": "Hand refilling ink tank with ink bottles.",<br>    "jp": "インク瓶でインクタンクを手作業で補充しましょう。",<br>    "nl": "Inkttank met de hand bijvullen met inktflessen.",<br>    "fr": "Rechargez le réservoir d'encre à la main avec des bouteilles d'encre."<br>  }<br>}</pre> |
-| <img src="../assets/img_3.png" width="200" alt="img_3"> | <pre lang="json">{<br>  "altText": {<br>    "en": "Compact ink tank printer in black Epson EcoTank L3560.",<br>    "jp": "黒のコンパクトインクタンクプリンター Epson EcoTank L3560。",<br>    "nl": "Compacte inkttankprinter in zwart Epson EcoTank L3560.",<br>    "fr": "Imprimante compacte à encre en noir Epson EcoTank L3560."<br>  }<br>}</pre> |
-| <img src="../assets/img_4.png" width="200" alt="img_4"> | <pre lang="json">{<br>  "altText": {<br>    "en": "Ink tank refill bottles in various colors.",<br>    "jp": "さまざまな色のインクタンク補充ボトル。",<br>    "nl": "Inkttankflessen in verschillende kleuren.",<br>    "fr": "Bouteilles de recharge pour réservoir d'encre de différentes couleurs."<br>  }<br>}</pre> |
-| <img src="../assets/img_5.png" width="200" alt="img_5"> | <pre lang="json">{<br>  "altText": {<br>    "en": "Epson eco tank ink cost savings.",<br>    "jp": "エプソン・エコタンクインクのコスト削減。",<br>    "nl": "Epson Eco tank inkt bespaart kosten.",<br>    "fr": "Économies de coûts pour l'encre Epson Eco Tank."<br>  }<br>}</pre> |
-| <img src="../assets/img_6.png" width="200" alt="img_6"> | <pre lang="json">{<br>  "altText": {<br>    "en": "Print on the go with the epson smart panel app.",<br>    "jp": "エプソンのスマートパネルアプリで持ち帰りながら印刷できます。",<br>    "nl": "Print onderweg met de Epson Smart Panel-app.",<br>    "fr": "Imprimez en déplacement avec l'application Epson Smart Panel."<br>  }<br>}</pre> |
-| <img src="../assets/img_7.png" width="200" alt="img_7"> | <pre lang="json">{<br>  "altText": {<br>    "en": "Ink bottle with black ink cartridge in a trash can.",<br>    "jp": "ゴミ箱の中の黒インクカートリッジ入りインク瓶。",<br>    "nl": "Inktfles met zwarte inktcartridge in een prullenbak.",<br>    "fr": "Encrier avec cartouche noire dans une poubelle."<br>  }<br>}</pre> |
-| <img src="../assets/img_8.png" width="200" alt="img_8"> | <pre lang="json">{<br>  "altText": {<br>    "en": "Epson EcoTank L3560 multifunction ink tank printer in black with 3 years of ink included.",<br>    "jp": "Epson EcoTank L3560 マルチファンクションインクタンクプリンター(黒、3年分のインク同梱)。",<br>    "nl": "Epson EcoTank L3560 multifunctionele inkttankprinter in zwart met 3 jaar inkt inbegrepen.",<br>    "fr": "Epson EcoTank L3560 imprimante multifonction pour réservoir d'encre noire avec 3 ans d'encre incluse."<br>  }<br>}</pre> |
-| <img src="../assets/img_10.png" width="200" alt="img_10"> | <pre lang="json">{<br>  "altText": {<br>    "en": "Inkjet printer with ecotank ink cartridges.",<br>    "jp": "エコタンクインクカートリッジ付きのインクジェットプリンター。",<br>    "nl": "Inkjetprinter met Ecotank-inktcartridges.",<br>    "fr": "Imprimante jet d'encre avec cartouches d'encre ecotank."<br>  }<br>}</pre> |
+<table>
+<tr>
+<th width="200">Image</th>
+<th>Pipeline Output</th>
+</tr>
+<tr>
+<td><img src="../assets/img_0.png" width="200" alt="img_0"></td>
+<td>
+
+```json
+{
+  "asset": "img_0.png",
+  "image": "img_0.png",
+  "source": "public website",
+  "altText": {
+    "en": "Colorful Epson ink tank printer.",
+    "jp": "カラフルなエプソンインクタンクプリンター。",
+    "nl": "Kleurrijke Epson inkttankprinter.",
+    "fr": "Imprimante Epson colorée pour réservoir d'encre."
+  },
+  "generatedAt": "2026-02-10T12:23:52+00:00"
+}
+```
+
+</td>
+</tr>
+<tr>
+<td><img src="../assets/img_1.png" width="200" alt="img_1"></td>
+<td>
+
+```json
+{
+  "altText": {
+    "en": "Epson ink tank printer ecoTank L3560 a4 multifunction printer.",
+    "jp": "エプソンのインクタンクプリンター、ecoTank L3560 a4、多機能プリンター。",
+    "nl": "Epson inkttankprinter ecoTank L3560 a4 multifunctionele printer.",
+    "fr": "Imprimante à réservoir d'encre Epson EcoTank L3560 A4 imprimante multifonction."
+  }
+}
+```
+
+</td>
+</tr>
+<tr>
+<td><img src="../assets/img_2.png" width="200" alt="img_2"></td>
+<td>
+
+```json
+{
+  "altText": {
+    "en": "Hand refilling ink tank with ink bottles.",
+    "jp": "インク瓶でインクタンクを手作業で補充しましょう。",
+    "nl": "Inkttank met de hand bijvullen met inktflessen.",
+    "fr": "Rechargez le réservoir d'encre à la main avec des bouteilles d'encre."
+  }
+}
+```
+
+</td>
+</tr>
+<tr>
+<td><img src="../assets/img_3.png" width="200" alt="img_3"></td>
+<td>
+
+```json
+{
+  "altText": {
+    "en": "Compact ink tank printer in black Epson EcoTank L3560.",
+    "jp": "黒のコンパクトインクタンクプリンター Epson EcoTank L3560。",
+    "nl": "Compacte inkttankprinter in zwart Epson EcoTank L3560.",
+    "fr": "Imprimante compacte à encre en noir Epson EcoTank L3560."
+  }
+}
+```
+
+</td>
+</tr>
+<tr>
+<td><img src="../assets/img_4.png" width="200" alt="img_4"></td>
+<td>
+
+```json
+{
+  "altText": {
+    "en": "Ink tank refill bottles in various colors.",
+    "jp": "さまざまな色のインクタンク補充ボトル。",
+    "nl": "Inkttankflessen in verschillende kleuren.",
+    "fr": "Bouteilles de recharge pour réservoir d'encre de différentes couleurs."
+  }
+}
+```
+
+</td>
+</tr>
+<tr>
+<td><img src="../assets/img_5.png" width="200" alt="img_5"></td>
+<td>
+
+```json
+{
+  "altText": {
+    "en": "Epson eco tank ink cost savings.",
+    "jp": "エプソン・エコタンクインクのコスト削減。",
+    "nl": "Epson Eco tank inkt bespaart kosten.",
+    "fr": "Économies de coûts pour l'encre Epson Eco Tank."
+  }
+}
+```
+
+</td>
+</tr>
+<tr>
+<td><img src="../assets/img_6.png" width="200" alt="img_6"></td>
+<td>
+
+```json
+{
+  "altText": {
+    "en": "Print on the go with the epson smart panel app.",
+    "jp": "エプソンのスマートパネルアプリで持ち帰りながら印刷できます。",
+    "nl": "Print onderweg met de Epson Smart Panel-app.",
+    "fr": "Imprimez en déplacement avec l'application Epson Smart Panel."
+  }
+}
+```
+
+</td>
+</tr>
+<tr>
+<td><img src="../assets/img_7.png" width="200" alt="img_7"></td>
+<td>
+
+```json
+{
+  "altText": {
+    "en": "Ink bottle with black ink cartridge in a trash can.",
+    "jp": "ゴミ箱の中の黒インクカートリッジ入りインク瓶。",
+    "nl": "Inktfles met zwarte inktcartridge in een prullenbak.",
+    "fr": "Encrier avec cartouche noire dans une poubelle."
+  }
+}
+```
+
+</td>
+</tr>
+<tr>
+<td><img src="../assets/img_8.png" width="200" alt="img_8"></td>
+<td>
+
+```json
+{
+  "altText": {
+    "en": "Epson EcoTank L3560 multifunction ink tank printer in black with 3 years of ink included.",
+    "jp": "Epson EcoTank L3560 マルチファンクションインクタンクプリンター(黒、3年分のインク同梱)。",
+    "nl": "Epson EcoTank L3560 multifunctionele inkttankprinter in zwart met 3 jaar inkt inbegrepen.",
+    "fr": "Epson EcoTank L3560 imprimante multifonction pour réservoir d'encre noire avec 3 ans d'encre incluse."
+  }
+}
+```
+
+</td>
+</tr>
+<tr>
+<td><img src="../assets/img_10.png" width="200" alt="img_10"></td>
+<td>
+
+```json
+{
+  "altText": {
+    "en": "Inkjet printer with ecotank ink cartridges.",
+    "jp": "エコタンクインクカートリッジ付きのインクジェットプリンター。",
+    "nl": "Inkjetprinter met Ecotank-inktcartridges.",
+    "fr": "Imprimante jet d'encre avec cartouches d'encre ecotank."
+  }
+}
+```
+
+</td>
+</tr>
+</table>
 
 ---
 
