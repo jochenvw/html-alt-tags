@@ -13,11 +13,11 @@ All images are from the Epson EcoTank L3560 product listing. Each image was uplo
 
 <table>
 <tr>
-<th width="200">Image</th>
+<th width="500">Image</th>
 <th>Pipeline Output</th>
 </tr>
 <tr>
-<td><img src="../assets/img_0.png" width="200" alt="img_0"></td>
+<td><img src="../assets/img_0.png" width="500" alt="img_0"></td>
 <td>
 
 ```json
@@ -38,7 +38,7 @@ All images are from the Epson EcoTank L3560 product listing. Each image was uplo
 </td>
 </tr>
 <tr>
-<td><img src="../assets/img_1.png" width="200" alt="img_1"></td>
+<td><img src="../assets/img_1.png" width="500" alt="img_1"></td>
 <td>
 
 ```json
@@ -55,7 +55,7 @@ All images are from the Epson EcoTank L3560 product listing. Each image was uplo
 </td>
 </tr>
 <tr>
-<td><img src="../assets/img_2.png" width="200" alt="img_2"></td>
+<td><img src="../assets/img_2.png" width="500" alt="img_2"></td>
 <td>
 
 ```json
@@ -72,7 +72,7 @@ All images are from the Epson EcoTank L3560 product listing. Each image was uplo
 </td>
 </tr>
 <tr>
-<td><img src="../assets/img_3.png" width="200" alt="img_3"></td>
+<td><img src="../assets/img_3.png" width="500" alt="img_3"></td>
 <td>
 
 ```json
@@ -89,7 +89,7 @@ All images are from the Epson EcoTank L3560 product listing. Each image was uplo
 </td>
 </tr>
 <tr>
-<td><img src="../assets/img_4.png" width="200" alt="img_4"></td>
+<td><img src="../assets/img_4.png" width="500" alt="img_4"></td>
 <td>
 
 ```json
@@ -106,7 +106,7 @@ All images are from the Epson EcoTank L3560 product listing. Each image was uplo
 </td>
 </tr>
 <tr>
-<td><img src="../assets/img_5.png" width="200" alt="img_5"></td>
+<td><img src="../assets/img_5.png" width="500" alt="img_5"></td>
 <td>
 
 ```json
@@ -123,7 +123,7 @@ All images are from the Epson EcoTank L3560 product listing. Each image was uplo
 </td>
 </tr>
 <tr>
-<td><img src="../assets/img_6.png" width="200" alt="img_6"></td>
+<td><img src="../assets/img_6.png" width="500" alt="img_6"></td>
 <td>
 
 ```json
@@ -140,7 +140,7 @@ All images are from the Epson EcoTank L3560 product listing. Each image was uplo
 </td>
 </tr>
 <tr>
-<td><img src="../assets/img_7.png" width="200" alt="img_7"></td>
+<td><img src="../assets/img_7.png" width="500" alt="img_7"></td>
 <td>
 
 ```json
@@ -157,7 +157,7 @@ All images are from the Epson EcoTank L3560 product listing. Each image was uplo
 </td>
 </tr>
 <tr>
-<td><img src="../assets/img_8.png" width="200" alt="img_8"></td>
+<td><img src="../assets/img_8.png" width="500" alt="img_8"></td>
 <td>
 
 ```json
@@ -174,7 +174,7 @@ All images are from the Epson EcoTank L3560 product listing. Each image was uplo
 </td>
 </tr>
 <tr>
-<td><img src="../assets/img_10.png" width="200" alt="img_10"></td>
+<td><img src="../assets/img_10.png" width="500" alt="img_10"></td>
 <td>
 
 ```json
