@@ -20,9 +20,16 @@ Guidelines:
 8. No marketing hype or superlatives.
 9. Avoid redundancy if filename already contains product name (assume filename may not be shown to user).
 10. Be precise, concrete, and visually grounded.
+11. Use correct punctuation: sentences must start with a capital letter and end with a full stop.
 
 Prioritization Order:
 Visual object → Brand/Model → Key visible feature → Use context (if shown)
+
+---
+
+## Examples (4-Shot Learning)
+
+The following examples demonstrate the expected style, tone, and structure. Study these patterns before generating new alt text.
 
 Example 1:
 Input image description: Front-facing black Epson EcoTank L3560 printer on white background.

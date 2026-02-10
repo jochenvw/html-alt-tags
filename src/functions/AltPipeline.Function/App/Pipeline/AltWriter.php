@@ -10,7 +10,7 @@ use Psr\Log\LoggerInterface;
  *
  * Writes *.alt.json sidecar next to blob.
  * Sets blob tags: processed=true, alt.v=1, langs=...
- * Copies approved blob to /public/ container.
+ * Copies blob to /public/ container.
  */
 class AltWriter {
     private BlobClient $blobClient;
@@ -25,21 +25,18 @@ class AltWriter {
      * Write alt text result to storage
      *
      * @param string $blobName Original blob filename (e.g., "img_0.png")
-     * @param array $altJson Alt text result: { asset, image, altText: { en, nl, fr }, confidence, policyCompliant, violations }
-     * @param bool $approved Whether to copy to /public/ container
+     * @param array $altJson Alt text result: { asset, image, altText: { en, nl, fr }, generatedAt }
      * @return array Write result: { sidecarName, blobs_written, tags_set, copied_to_public }
      */
     public function write(
         string $blobName,
-        array $altJson,
-        bool $approved = true
+        array $altJson
     ): array {
         $result = [
             'sidecarName' => '',
             'blobs_written' => [],
             'tags_set' => false,
             'copied_to_public' => false,
-            'violations' => $altJson['violations'] ?? [],
         ];
 
         try {
@@ -63,14 +60,13 @@ class AltWriter {
                 'processed' => 'true',
                 'alt.v' => '1',
                 'langs' => $languages,
-                'policy_compliant' => $approved ? 'true' : 'false',
             ];
 
             $this->blobClient->setTags('ingest', $blobName, $tags);
             $result['tags_set'] = true;
 
-            // Copy to public/ if approved
-            if ($approved && !$this->isJsonFile($blobName)) {
+            // Copy to public/
+            if (!$this->isJsonFile($blobName)) {
                 $this->blobClient->copyBlob('ingest', $blobName, 'public', $blobName);
                 $result['copied_to_public'] = true;
                 $this->logger->info("Copied $blobName to /public/ container");

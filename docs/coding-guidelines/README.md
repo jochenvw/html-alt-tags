@@ -20,7 +20,7 @@ Establish PHP 8.0+ as the language standard with strict types, PSR-12 formatting
 All Azure infrastructure defined in Bicep, deployed via Azure CLI, with parameterized environments.
 
 ### [ADR-003: Managed Identity-First Authentication & Security](adr-003-managed-identity-auth.md)
-Default to **system-assigned managed identity** wherever possible for Azure service-to-service authentication; never embed credentials in code.
+Default to **user-assigned managed identity** for Azure service-to-service authentication; never embed credentials in code.
 
 ### [ADR-004: Terse, Readable Code Style & Naming Conventions](adr-004-code-style.md)
 Consistent naming patterns (verb-noun methods, boolean prefixes) with early returns and specific exceptions.
@@ -41,7 +41,7 @@ Context: Follow ADRs:
 - ADR-004
 
 Ensure:
-- System-assigned managed identity for authentication whenever possible
+- Managed identity for authentication (user-assigned via `AZURE_CLIENT_ID`)
 - Proper type hints and strict types
 - Error handling with specific exceptions
 - Clear naming and structure
@@ -56,7 +56,7 @@ Ensure:
 ## Key Principles
 
 ### Authentication
-✅ **Always use system-assigned managed identity** for Azure service-to-service communication when possible
+✅ **Always use managed identity** for Azure service-to-service communication (user-assigned for Container Apps)
 ❌ Never embed API keys, connection strings, or credentials in code
 
 ### PHP Style

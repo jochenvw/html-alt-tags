@@ -23,18 +23,25 @@ Quick guide to deploy and run the Azure Alt-Text Pipeline.
 
 2. **Configure environment variables:**
    
-   Edit [.env](.env) with your Azure credentials:
+   Edit [.env](.env) with your Azure configuration:
    ```bash
-   # Azure Foundry (Phi-4)
-   AZURE_FOUNDRY_ENDPOINT=https://your-foundry-gateway.azure-api.net/.../chat/completions
-   AZURE_FOUNDRY_KEY=your-api-key
+   # Azure AI Foundry (Phi-4)
+   AZURE_FOUNDRY_ENDPOINT=https://your-foundry.cognitiveservices.azure.com
+   AZURE_FOUNDRY_DEPLOYMENT_SLM=Phi-4-multimodal-instruct
    
-   # Azure Tenant
-   AZURE_TENANT_ID=your-tenant-id
-   AZURE_REGION=swedencentral
+   # Azure AI Translator
+   AZURE_TRANSLATOR_ENDPOINT=https://your-translator.cognitiveservices.azure.com
+   AZURE_TRANSLATOR_REGION=swedencentral
    
-   # Multi-tenant support
-   MULTI_TENANT_ENABLED=true
+   # Azure Storage
+   AZURE_STORAGE_ACCOUNT=yourstorageaccount
+   
+   # Managed Identity (user-assigned)
+   AZURE_CLIENT_ID=your-managed-identity-client-id
+   
+   # Strategy
+   DESCRIBER=strategy:slm
+   TRANSLATOR=strategy:translator
    ```
 
 ## Deployment
@@ -92,10 +99,11 @@ Upload sample images and verify the pipeline:
 ```
 
 **What it does:**
-- Uploads sample images from `assets/` to storage
+- Cleans old results from previous runs
+- Uploads sample images + YAML sidecars from `assets/` to storage
 - Waits for Event Grid to trigger pipeline
-- Shows generated alt-text JSON
-- Lists processed blobs
+- Downloads generated `.alt.json` results to `results/`
+- Shows alt text and language summary for each image
 
 ## Utility Commands
 
@@ -126,11 +134,11 @@ status
 ```
 Upload Image → Storage (ingest) → Event Grid → Container App (PHP)
                                                      ↓
-                                                Phi-4 Foundry
+                                             Phi-4 Foundry (Describe)
                                                      ↓
-                                           Generate Alt-Text
+                                             Azure Translator (Translate)
                                                      ↓
-                              Storage (public) ← JSON Sidecar
+                              Storage (public) ← JSON Sidecar + Blob Tags
 ```
 
 ## Application Code
@@ -143,18 +151,18 @@ App/
 ├── Contracts/
 │   ├── ImageDescriber.php     # Interface for description services
 │   └── TextTranslator.php     # Interface for translation services
+├── Auth/
+│   └── ManagedIdentityCredential.php  # Azure MI token acquisition
 ├── Services/
-│   ├── Phi4Describer.php      # Phi-4 image description
-│   ├── Phi4Translator.php     # Phi-4 translation
-│   ├── SlmDescriber.php       # GPT-3.5 alternative
+│   ├── SlmDescriber.php       # Phi-4 via AI Foundry (default)
 │   ├── LlmDescriber.php       # GPT-4 alternative
 │   ├── VisionDescriber.php    # Azure Vision alternative
-│   └── TranslatorService.php  # Azure Translator alternative
+│   ├── TranslatorService.php  # Azure AI Translator (default)
+│   └── LlmTranslator.php      # GPT-4 translation fallback
 ├── Pipeline/
-│   ├── PipelineOrchestrator.php  # Main workflow
+│   ├── PipelineOrchestrator.php  # Main workflow (7 steps)
 │   ├── CmsDistiller.php          # Extract facts from metadata
 │   ├── VisionHints.php           # Optional vision pre-analysis
-│   ├── Guardrails.php            # Validate alt-text quality
 │   └── AltWriter.php             # Write results to storage
 └── Storage/
     └── BlobClient.php         # Azure Storage operations
@@ -165,17 +173,15 @@ App/
 Strategy selection in `.env`:
 
 ```bash
-# Use Phi-4 for both tasks (recommended)
-DESCRIBER=strategy:phi4
-TRANSLATOR=strategy:phi4
+# Phi-4 for description, Azure Translator for translation (recommended)
+DESCRIBER=strategy:slm
+TRANSLATOR=strategy:translator
 
 # Alternative strategies
-DESCRIBER=strategy:slm      # GPT-3.5
 DESCRIBER=strategy:llm      # GPT-4
 DESCRIBER=strategy:vision   # Azure Vision
 
-TRANSLATOR=strategy:translator  # Azure Translator
-TRANSLATOR=strategy:llm         # GPT-4 translation
+TRANSLATOR=strategy:llm     # GPT-4 translation
 ```
 
 ## Multi-Tenant Usage
@@ -286,8 +292,9 @@ az storage blob list \
 
 ### "Alt-text not generated"
 - Check container logs for errors
-- Verify Phi-4 Foundry endpoint and key are correct
-- Ensure storage account has public blob access enabled
+- Verify Phi-4 Foundry endpoint is correct (`AZURE_FOUNDRY_ENDPOINT`)
+- Ensure Managed Identity has `Cognitive Services User` role on the AI Foundry resource
+- Check that storage account has public network access enabled
 
 ## Cleanup
 

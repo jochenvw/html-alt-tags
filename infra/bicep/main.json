@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.40.2.10011",
-      "templateHash": "2136537513013414003"
+      "templateHash": "13638268624796443250"
     }
   },
   "parameters": {
@@ -57,6 +57,20 @@
       "defaultValue": false,
       "metadata": {
         "description": "Skip Event Grid subscription creation (create it manually after app deployment)"
+      }
+    },
+    "foundryEndpoint": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Azure AI Foundry gateway endpoint (base URL)"
+      }
+    },
+    "foundryDeploymentSlm": {
+      "type": "string",
+      "defaultValue": "Phi-4-multimodal-instruct",
+      "metadata": {
+        "description": "Azure AI Foundry deployment name for SLM"
       }
     }
   },
@@ -318,6 +332,10 @@
                   "secretRef": "storage-connection"
                 },
                 {
+                  "name": "AZURE_CLIENT_ID",
+                  "value": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('managedIdentityName')), '2023-01-31').clientId]"
+                },
+                {
                   "name": "LOG_LEVEL",
                   "value": "info"
                 },
@@ -326,20 +344,20 @@
                   "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts', format('cv-alt-pipeline-{0}', uniqueString(resourceGroup().id))), '2023-05-01').endpoint]"
                 },
                 {
-                  "name": "AZURE_VISION_KEY",
-                  "value": "[listKeys(resourceId('Microsoft.CognitiveServices/accounts', format('cv-alt-pipeline-{0}', uniqueString(resourceGroup().id))), '2023-05-01').key1]"
-                },
-                {
                   "name": "AZURE_TRANSLATOR_ENDPOINT",
                   "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts', format('tr-alt-pipeline-{0}', uniqueString(resourceGroup().id))), '2023-05-01').endpoint]"
                 },
                 {
-                  "name": "AZURE_TRANSLATOR_KEY",
-                  "value": "[listKeys(resourceId('Microsoft.CognitiveServices/accounts', format('tr-alt-pipeline-{0}', uniqueString(resourceGroup().id))), '2023-05-01').key1]"
-                },
-                {
                   "name": "AZURE_TRANSLATOR_REGION",
                   "value": "[parameters('location')]"
+                },
+                {
+                  "name": "AZURE_FOUNDRY_ENDPOINT",
+                  "value": "[parameters('foundryEndpoint')]"
+                },
+                {
+                  "name": "AZURE_FOUNDRY_DEPLOYMENT_SLM",
+                  "value": "[parameters('foundryDeploymentSlm')]"
                 }
               ]
             }

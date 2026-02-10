@@ -68,25 +68,14 @@ class SlmDescriber implements ImageDescriber {
             // Parse response - extract JSON robustly
             $result = $this->extractJson($response);
 
-            $this->logger->info("SlmDescriber result for {$blobName}", $result);
+            $altEn = $result['alt_en'] ?? '';
+            $this->logger->info("SlmDescriber result for {$blobName}", ['alt_en' => $altEn]);
 
-            return [
-                'alt_en' => $result['alt_en'] ?? '',
-                'confidence' => $result['confidence'] ?? 0.5,
-                'policy_compliant' => $result['policy_compliant'] ?? false,
-                'tags' => $result['tags'] ?? [],
-                'violations' => $result['violations'] ?? [],
-            ];
+            return ['alt_en' => $altEn];
 
         } catch (\Exception $e) {
             $this->logger->error("SlmDescriber error: " . $e->getMessage());
-            return [
-                'alt_en' => '',
-                'confidence' => 0.0,
-                'policy_compliant' => false,
-                'tags' => [],
-                'violations' => ['slm_error'],
-            ];
+            return ['alt_en' => ''];
         }
     }
 
@@ -164,19 +153,8 @@ class SlmDescriber implements ImageDescriber {
         return <<<'FORMAT'
 ## Response Format
 
-You MUST respond with valid JSON in this exact structure:
-
-```json
-{
-  "alt_en": "string (the generated alt text in English)",
-  "confidence": 0.0–1.0 (numeric confidence score),
-  "policy_compliant": true|false (boolean compliance indicator),
-  "tags": ["array", "of", "strings"],
-  "violations": ["array", "of", "violation", "codes"]
-}
-```
-
-Return ONLY valid JSON. All five fields are required.
+Respond with ONLY the alt text string. No JSON, no markdown, no explanation.
+The text must start with a capital letter and end with a full stop.
 FORMAT;
     }
     
@@ -195,17 +173,9 @@ Your task is to generate a single, concise alt text that:
 5. NEVER includes the phrases: "image of", "picture of", internal codes, marketing hype, or unverifiable claims
 6. Does NOT add details not visible in the image or provided metadata
 7. Is precise, concrete, and accessible to all users (including screen reader users)
+8. Uses correct punctuation: starts with a capital letter, ends with a full stop (.)
 
-Format your response as a JSON object with these fields:
-{
-  "alt_en": "...",
-  "confidence": 0.0–1.0,
-  "policy_compliant": true|false,
-  "tags": [...],
-  "violations": [...]
-}
-
-Keep the response valid JSON. Use only the fields above.
+Respond with ONLY the alt text string. No JSON, no markdown, no explanation.
 PROMPT;
     }
 
@@ -252,6 +222,7 @@ PROMPT;
         // Try direct JSON parse first
         $result = json_decode($response, true);
         if (is_array($result) && isset($result['alt_en'])) {
+            $result['alt_en'] = $this->normalizePunctuation($result['alt_en']);
             return $result;
         }
 
@@ -260,6 +231,7 @@ PROMPT;
             $result = json_decode(trim($matches[1]), true);
             if (is_array($result) && isset($result['alt_en'])) {
                 $this->logger->debug("Extracted JSON from code fence");
+                $result['alt_en'] = $this->normalizePunctuation($result['alt_en']);
                 return $result;
             }
         }
@@ -269,6 +241,7 @@ PROMPT;
             $result = json_decode($matches[0], true);
             if (is_array($result) && isset($result['alt_en'])) {
                 $this->logger->debug("Extracted JSON object from text");
+                $result['alt_en'] = $this->normalizePunctuation($result['alt_en']);
                 return $result;
             }
         }
@@ -278,6 +251,9 @@ PROMPT;
             $result = json_decode($matches[0], true);
             if (is_array($result)) {
                 $this->logger->debug("Extracted generic JSON object from text");
+                if (isset($result['alt_en'])) {
+                    $result['alt_en'] = $this->normalizePunctuation($result['alt_en']);
+                }
                 return $result;
             }
         }
@@ -295,18 +271,36 @@ PROMPT;
             $altText = substr($altText, 0, 197) . '...';
         }
 
+        // Normalize punctuation
+        $altText = $this->normalizePunctuation($altText);
+
         $this->logger->warning("Could not extract JSON from model response, using raw text as alt", [
             'raw_preview' => substr($response, 0, 200),
             'alt_text' => $altText
         ]);
 
-        return [
-            'alt_en' => $altText,
-            'confidence' => 0.6,
-            'policy_compliant' => false,
-            'tags' => ['fallback_parse'],
-            'violations' => [],
-        ];
+        return ['alt_en' => $altText];
+    }
+
+    /**
+     * Normalize punctuation: capitalize first letter, ensure trailing full stop.
+     */
+    private function normalizePunctuation(string $text): string {
+        $text = trim($text);
+        if (empty($text)) {
+            return $text;
+        }
+
+        // Capitalize first letter (multibyte-safe)
+        $text = mb_strtoupper(mb_substr($text, 0, 1)) . mb_substr($text, 1);
+
+        // Ensure trailing full stop (don't double-add if already ends with punctuation)
+        $lastChar = mb_substr($text, -1);
+        if (!in_array($lastChar, ['.', '!', '?'], true)) {
+            $text .= '.';
+        }
+
+        return $text;
     }
 
     private function callOpenAI(string $systemPrompt, string $userPrompt, ?string $sasUrl = null): string {

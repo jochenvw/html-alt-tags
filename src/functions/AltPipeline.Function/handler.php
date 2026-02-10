@@ -220,12 +220,8 @@ function handleDescribe(string $method): void {
             $result = $orchestrator->processBlob($blobName);
             
             $altTexts = $result['altJson']['altText'] ?? [];
-            $confidence = $result['altJson']['confidence'] ?? 0.0;
-            $policyCompliant = $result['altJson']['policyCompliant'] ?? false;
             
             $logger->info("Pipeline completed for: $blobName", [
-                'confidence' => $confidence,
-                'policyCompliant' => $policyCompliant,
                 'languages' => array_keys($altTexts),
             ]);
             
@@ -234,9 +230,6 @@ function handleDescribe(string $method): void {
                     'status' => 'processed',
                     'blob' => $blobName,
                     'altText' => $altTexts,
-                    'confidence' => $confidence,
-                    'policyCompliant' => $policyCompliant,
-                    'violations' => $result['altJson']['violations'] ?? [],
                 ],
                 200
             );

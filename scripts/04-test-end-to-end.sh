@@ -41,7 +41,29 @@ fi
 echo "📋 Found ${#IMAGES[@]} image(s) in assets folder"
 
 # ============================================================================
-# 2. Upload All Assets to Ingest Container
+# 2. Clean Up Old Alt-Text Results
+# ============================================================================
+
+echo ""
+echo "🧹 Removing old .alt.json blobs from ingest container..."
+
+for img in "${IMAGES[@]}"; do
+  BASENAME=$(basename "$img")
+  STEM="${BASENAME%.*}"
+  ALT_JSON="${STEM}.alt.json"
+
+  az storage blob delete \
+    --account-name "$STORAGE_ACCOUNT" \
+    --auth-mode login \
+    --container-name "ingest" \
+    --name "$ALT_JSON" \
+    --only-show-errors 2>/dev/null || true
+done
+
+echo "   ✅ Old results cleaned"
+
+# ============================================================================
+# 3. Upload All Assets to Ingest Container
 # ============================================================================
 
 echo ""
@@ -112,7 +134,7 @@ echo ""
 echo "✅ ${#IMAGE_NAMES[@]} image(s) uploaded to: https://$STORAGE_ACCOUNT.blob.core.windows.net/ingest/"
 
 # ============================================================================
-# 3. Wait for Event Grid Processing
+# 4. Wait for Event Grid Processing
 # ============================================================================
 
 echo ""
@@ -125,7 +147,7 @@ INITIAL_WAIT=$((30 + (${#IMAGE_NAMES[@]} - 1) * 10))
 sleep $INITIAL_WAIT
 
 # ============================================================================
-# 4. Poll for All Alt-Text JSON Results
+# 5. Poll for All Alt-Text JSON Results
 # ============================================================================
 
 echo ""
@@ -172,7 +194,7 @@ while [ $ELAPSED -lt $MAX_WAIT ] && [ $FOUND_COUNT -lt ${#IMAGE_NAMES[@]} ]; do
 done
 
 # ============================================================================
-# 5. Download and Display Results
+# 6. Download and Display Results
 # ============================================================================
 
 RESULTS_DIR="$PROJECT_DIR/results"
@@ -200,14 +222,11 @@ for name in "${IMAGE_NAMES[@]}"; do
       --only-show-errors 2>/dev/null
 
     ALT_EN=$(jq -r '.altText.en // "N/A"' "$RESULTS_DIR/$ALT_JSON" 2>/dev/null)
-    CONFIDENCE=$(jq -r '.confidence // "N/A"' "$RESULTS_DIR/$ALT_JSON" 2>/dev/null)
     LANGS=$(jq -r '.altText | keys | join(", ")' "$RESULTS_DIR/$ALT_JSON" 2>/dev/null)
-    COMPLIANT=$(jq -r '.policyCompliant' "$RESULTS_DIR/$ALT_JSON" 2>/dev/null)
 
     echo "✅ $name"
     echo "   Alt:        $ALT_EN"
     echo "   Languages:  $LANGS"
-    echo "   Confidence: $CONFIDENCE | Compliant: $COMPLIANT"
     echo ""
   else
     FAILED_IMAGES+=("$name")
@@ -217,7 +236,7 @@ for name in "${IMAGE_NAMES[@]}"; do
 done
 
 # ============================================================================
-# 6. Summary
+# 7. Summary
 # ============================================================================
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

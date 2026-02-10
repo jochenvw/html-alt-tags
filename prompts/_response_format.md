@@ -1,32 +1,11 @@
 ## Response Format
 
-You MUST respond with valid JSON in this exact structure:
-
-```json
-{
-  "alt_en": "string (the generated alt text in English)",
-  "confidence": 0.0–1.0 (numeric confidence score),
-  "policy_compliant": true|false (boolean compliance indicator),
-  "tags": ["array", "of", "strings"],
-  "violations": ["array", "of", "violation", "codes"]
-}
-```
+Respond with ONLY the alt text string. No JSON, no markdown, no explanation, no extra text.
 
 **Requirements:**
-- Return ONLY valid JSON (no markdown, no explanations, no extra text)
-- All five fields are required
-- `alt_en` must be a non-empty string
-- `confidence` must be a number between 0.0 and 1.0
-- `policy_compliant` must be boolean (true or false)
-- `tags` and `violations` must be arrays (can be empty: [])
+- Return a single sentence of alt text in English
+- The text must start with a capital letter and end with a full stop (.)
+- Do NOT wrap in quotes, JSON, or code blocks
 
 **Example Valid Response:**
-```json
-{
-  "alt_en": "Epson EcoTank L3560 A4 multifunction ink tank printer in black",
-  "confidence": 0.92,
-  "policy_compliant": true,
-  "tags": ["printer", "ecotank", "multifunction"],
-  "violations": []
-}
-```
+Epson EcoTank L3560 A4 multifunction ink tank printer in black, front view with compact desktop design.

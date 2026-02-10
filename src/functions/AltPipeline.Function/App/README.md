@@ -18,7 +18,7 @@ App/
 │   ├── ImageDescriber.php       # Interface for describers
 │   └── TextTranslator.php       # Interface for translators
 ├── Services/
-│   ├── SlmDescriber.php         # Azure OpenAI SLM (strategy)
+│   ├── SlmDescriber.php         # Azure AI Foundry / Phi-4 (strategy)
 │   ├── LlmDescriber.php         # Azure OpenAI LLM (strategy)
 │   ├── VisionDescriber.php      # Azure AI Vision (strategy)
 │   ├── TranslatorService.php    # Azure AI Translator (strategy)
@@ -27,8 +27,9 @@ App/
 │   ├── PipelineOrchestrator.php # Main processing flow
 │   ├── CmsDistiller.php         # Extract product facts from CMS text
 │   ├── VisionHints.php          # Derive angle/view heuristics
-│   ├── Guardrails.php           # Validate against system prompt rules
 │   └── AltWriter.php            # Persist *.alt.json & set blob tags
+├── Auth/
+│   └── ManagedIdentityCredential.php  # Azure MI token provider
 └── Storage/
     └── BlobClient.php           # Azure Blob Storage wrapper
 ```
@@ -41,10 +42,9 @@ graph LR
     B --> C[CmsDistiller]
     C --> D[VisionHints]
     D --> E[Describer <br/>SLM|LLM|Vision]
-    E --> F[Guardrails<br/>Validation]
-    F --> G[Translator<br/>Translator|LLM]
-    G --> H[AltWriter<br/>Persist]
-    H --> I[Return JSON]
+    E --> F[Translator<br/>Translator|LLM]
+    F --> G[AltWriter<br/>Persist]
+    G --> H[Return JSON]
 ```
 
 ## Configuration
@@ -62,7 +62,7 @@ AZURE_FOUNDRY_DEPLOYMENT_SLM=Phi-4-multimodal-instruct
 AZURE_VISION_ENDPOINT=...
 AZURE_TRANSLATOR_ENDPOINT=...
 AZURE_STORAGE_ACCOUNT=...
-AZURE_STORAGE_ACCOUNT_KEY=...
+AZURE_CLIENT_ID=...                  # User-assigned managed identity
 LOG_LEVEL=info
 ```
 
@@ -113,25 +113,17 @@ See [prompts/public_website_system_prompt.md](../../prompts/public_website_syste
 ```json
 {
   "status": "ok",
-  "altJson": {
-    "asset": "epson-ecotank-l3560",
+  "blob": "img_0.png",
+  "altText": {
+    "asset": "img_0.png",
     "image": "img_0.png",
     "source": "public website",
     "altText": {
-      "en": "Epson EcoTank L3560 A4 multifunction ink tank printer in black, front view with compact desktop design.",
-      "nl": "Epson EcoTank L3560 A4 multifunctie-printer met inktanks in zwart, vooraanzicht met compact bureaubladontwerp.",
-      "fr": "Imprimante multifonction EcoTank Epson L3560 A4 avec réservoirs d'encre en noir, vue de face avec design compact pour bureau."
+      "en": "Colorful Epson ink tank printer.",
+      "nl": "Kleurrijke Epson inkttankprinter.",
+      "fr": "Imprimante Epson colorée pour réservoir d'encre."
     },
-    "confidence": 0.89,
-    "policyCompliant": true,
-    "violations": [],
-    "generatedAt": "2024-02-09T15:30:00Z"
-  },
-  "tags": {
-    "processed": "true",
-    "alt.v": "1",
-    "langs": "EN,NL,FR",
-    "policy_compliant": "true"
+    "generatedAt": "2026-02-10T12:23:52+00:00"
   }
 }
 ```
@@ -149,23 +141,24 @@ See [prompts/public_website_system_prompt.md](../../prompts/public_website_syste
 ```json
 {
   "error": "Processing failed",
-  "message": "SlmDescriber error: OpenAI API error: HTTP 401",
-  "violations": ["processing_error"]
+  "message": "SlmDescriber error: OpenAI API error: HTTP 401"
 }
 ```
 
-## Guardrails
+## Quality Rules
 
-Validation checks in `Guardrails.php`:
+Quality is enforced through the **system prompt** rather than a separate validation step. The prompt instructs Phi-4 to:
 
-| Check | Condition | Violation |
-|-------|-----------|-----------|
-| **Forbidden phrases** | "image of", "picture of", codes | `forbidden_phrase_*` |
-| **Brand/Model** | Must contain make OR model | `missing_brand_model` |
-| **Length** | ≤125 chars | `length_exceeded` |
-| **Length** | ≥20 chars | `too_short` |
-| **Confidence** | ≥0.7 threshold | `low_confidence` |
-| **Marketing claims** | No superlatives, hype | `marketing_claim` |
+| Rule | Guideline |
+|------|----------|
+| **Visual-first** | Describe what is visually present |
+| **Brand + Model** | Include make and model when visible |
+| **No filler** | No "image of", "picture of", codes |
+| **Length** | 80–160 chars optimal |
+| **No marketing** | No superlatives, hype, or claims |
+| **Punctuation** | Capital first letter, trailing full stop |
+
+Post-processing in `SlmDescriber.php` normalizes punctuation automatically.
 
 ## TODO TODOs for Production
 
@@ -228,10 +221,11 @@ curl -X POST http://localhost:8080/describe \
 - **No Durable Functions**: Single blob per request (reactive, immediate).
 - **PHP 8.3**: Modern syntax (attributes, match, fibers), good for serverless.
 - **Strategy pattern**: Easy provider swapping via env vars.
-- **SidecarJSON output**: `*.alt.json` written to same container as blob.
-- **Blob tags**: `processed=true`, `alt.v=1`, `langs=EN,NL,FR`, `policy_compliant=true|false`.
+- **Managed Identity**: Zero credentials in code — user-assigned MI for all Azure services.
+- **JSON output**: `*.alt.json` written to same container as blob.
+- **Blob tags**: `processed=true`, `alt.v=1`, `langs=EN,NL,FR`.
 - **Event Grid trigger**: Via Azure Container Apps HTTP endpoint (external ingress).
 
 ---
 
-**Status**: Scaffolding complete. Ready for integration with Azure Storage SDK and full testing.
+**Status**: Production-ready. Running on Azure Container Apps with Phi-4 via AI Foundry and Azure AI Translator.

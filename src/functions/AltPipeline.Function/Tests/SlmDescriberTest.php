@@ -38,16 +38,9 @@ class SlmDescriberTest extends TestCase {
 
         $this->assertIsArray($result);
         $this->assertArrayHasKey('alt_en', $result);
-        $this->assertArrayHasKey('confidence', $result);
-        $this->assertArrayHasKey('policy_compliant', $result);
     }
 
     public function testAltTextIncludesBrandModel(): void {
-        // TODO: Implement test with mocked API response
-        $this->markTestSkipped('Requires Azure OpenAI integration');
-    }
-
-    public function testConfidenceScoreIsWithinRange(): void {
         // TODO: Implement test with mocked API response
         $this->markTestSkipped('Requires Azure OpenAI integration');
     }

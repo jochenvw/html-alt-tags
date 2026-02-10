@@ -3,16 +3,10 @@
     "image": "img_6.png",
     "source": "public website",
     "altText": {
-        "en": "print on the go with the epson smart panel app",
-        "jp": "\u30a8\u30d7\u30bd\u30f3\u306e\u30b9\u30de\u30fc\u30c8\u30d1\u30cd\u30eb\u30a2\u30d7\u30ea\u3067\u6301\u3061\u5e30\u308a\u3067\u5370\u5237\u3067\u304d\u307e\u3059",
-        "nl": "Print onderweg met de Epson Smart Panel-app",
-        "fr": "Imprimez en d\u00e9placement avec l\u2019application Epson Smart Panel"
+        "en": "Print on the go with the epson smart panel app.",
+        "jp": "\u30a8\u30d7\u30bd\u30f3\u306e\u30b9\u30de\u30fc\u30c8\u30d1\u30cd\u30eb\u30a2\u30d7\u30ea\u3067\u6301\u3061\u5e30\u308a\u306a\u304c\u3089\u5370\u5237\u3067\u304d\u307e\u3059\u3002",
+        "nl": "Print onderweg met de Epson Smart Panel-app.",
+        "fr": "Imprimez en d\u00e9placement avec l\u2019application Epson Smart Panel."
     },
-    "confidence": 0.6,
-    "policyCompliant": false,
-    "violations": [
-        "missing_brand_model",
-        "low_confidence"
-    ],
-    "generatedAt": "2026-02-10T08:05:05+00:00"
+    "generatedAt": "2026-02-10T12:22:55+00:00"
 }

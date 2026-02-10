@@ -3,7 +3,7 @@
 namespace AltPipeline\Pipeline;
 
 use AltPipeline\Bootstrap;
-use AltPipeline\Pipeline\{CmsDistiller, VisionHints, Guardrails, AltWriter};
+use AltPipeline\Pipeline\{CmsDistiller, VisionHints, AltWriter};
 
 /**
  * PipelineOrchestrator - Main Pipeline Orchestration
@@ -13,9 +13,8 @@ use AltPipeline\Pipeline\{CmsDistiller, VisionHints, Guardrails, AltWriter};
  * 2. Extract product facts (CmsDistiller)
  * 3. Derive vision hints
  * 4. Generate alt text (Describer strategy)
- * 5. Validate (Guardrails)
- * 6. Translate (Translator strategy)
- * 7. Persist (AltWriter)
+ * 5. Translate (Translator strategy)
+ * 6. Persist (AltWriter)
  */
 class PipelineOrchestrator {
     private array $app;
@@ -71,39 +70,29 @@ class PipelineOrchestrator {
             );
 
             $altText = $describerResult['alt_en'] ?? '';
-            $confidence = $describerResult['confidence'] ?? 0.0;
 
-            // Step 5: Validate Against Guardrails
-            $guardrails = new Guardrails($logger);
-            $validation = $guardrails->validate($altText, $confidence, $make, $model);
-
-            // Step 6: Translate
+            // Step 5: Translate
             $normalizedLanguages = array_map('strtolower', array_map(fn($l) => substr($l, 0, 2), $languages));
             $translations = $translator->translate($altText, $normalizedLanguages, $metadata);
 
             $altTexts = ['en' => $altText] + $translations;
 
-            // Step 7: Build Final Alt JSON
+            // Step 6: Build Final Alt JSON
             $altJson = [
                 'asset' => $metadata['asset'] ?? 'unknown',
                 'image' => $blobName,
                 'source' => $metadata['source'] ?? 'unknown',
                 'altText' => $altTexts,
-                'confidence' => $confidence,
-                'policyCompliant' => $validation['policyCompliant'],
-                'violations' => $validation['violations'],
                 'generatedAt' => date('c'),
             ];
 
-            // Step 8: Persist
+            // Step 7: Persist
             $altWriter = new AltWriter($blobClient, $logger);
-            $approved = $validation['policyCompliant'] && $confidence >= 0.7;
-            $writeResult = $altWriter->write($blobName, $altJson, $approved);
+            $writeResult = $altWriter->write($blobName, $altJson);
 
             $logger->info("Pipeline complete", [
                 'blob' => $blobName,
-                'approved' => $approved,
-                'violations' => count($validation['violations']),
+                'languages' => array_keys($altTexts),
             ]);
 
             return [
@@ -112,7 +101,6 @@ class PipelineOrchestrator {
                     'processed' => 'true',
                     'alt.v' => '1',
                     'langs' => implode(',', $languages),
-                    'policy_compliant' => $approved ? 'true' : 'false',
                 ],
                 'writeResult' => $writeResult,
             ];

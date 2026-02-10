@@ -7,28 +7,27 @@
 
 ## What This System Does
 
-This system **automatically generates alt text for product images** — the short descriptions that screen readers use to help visually impaired users understand what an image shows. When someone uploads a product image (for example, a printer photo for an e-commerce website), the system looks at the image using AI, writes a clear description, translates it into multiple languages, checks that the description meets quality rules, and saves the result. The entire process is hands-free: upload an image, and the pipeline does the rest.
+This system **automatically generates alt text for product images** — the short descriptions that screen readers use to help visually impaired users understand what an image shows. When someone uploads a product image (for example, a printer photo for an e-commerce website), the system looks at the image using AI, writes a clear description, translates it into multiple languages, and saves the result. The entire process is hands-free: upload an image, and the pipeline does the rest.
 
 ---
 
 ## How It Works — The Big Picture
 
 ```
-┌──────────┐     ┌────────────┐     ┌───────────────┐     ┌──────────┐     ┌───────────┐
-│  Upload   │────▶│  Detect    │────▶│  Describe     │────▶│ Validate │────▶│ Translate  │
-│  Image    │     │  (Event    │     │  (AI Model)   │     │ (Quality │     │ & Save     │
-│           │     │   Grid)    │     │               │     │  Rules)  │     │            │
-└──────────┘     └────────────┘     └───────────────┘     └──────────┘     └───────────┘
-  Storage           Trigger           Azure AI              Guardrails       Translator
-                                      Foundry                                + Storage
+┌──────────┐     ┌────────────┐     ┌───────────────┐     ┌───────────┐     ┌─────────┐
+│  Upload   │────▶│  Detect    │────▶│  Describe     │────▶│ Translate │────▶│  Save   │
+│  Image    │     │  (Event    │     │  (AI Model)   │     │ (Azure    │     │         │
+│           │     │   Grid)    │     │               │     │  Translator)│     │         │
+└──────────┘     └────────────┘     └───────────────┘     └───────────┘     └─────────┘
+  Storage           Trigger           Azure AI              Azure AI          Storage
+                                      Foundry               Translator
 ```
 
 1. An image and its product metadata are uploaded to cloud storage.
 2. Azure Event Grid detects the new file and notifies the processing application.
 3. The application sends the image to an AI model (Phi-4) that writes a description in English.
-4. Built-in quality rules check the description for length, accuracy, and forbidden language.
-5. The description is translated into the required languages (e.g., Dutch, French, Japanese).
-6. The final result is saved alongside the original image; approved images are copied to a "ready to publish" area.
+4. The description is translated into the required languages (e.g., Dutch, French, Japanese).
+5. The final result is saved alongside the original image, and processed images are copied to a "ready to publish" area.
 
 ---
 
@@ -70,9 +69,9 @@ Log Analytics is the system's centralised logging and monitoring hub. Every comp
 
 Managed Identity is how all the components authenticate with each other without any passwords or API keys stored in the code. Azure issues each service an identity (like an employee badge), and we grant that identity specific permissions to access storage, AI models, and the container registry. This eliminates the risk of leaked credentials and removes the need for manual secret rotation. It is a security best practice recommended by Microsoft for all Azure workloads.
 
-### Quality Guardrails
+### Quality Rules via System Prompts
 
-While not an Azure service, the guardrails module is a critical pipeline component. It automatically validates every AI-generated description against a set of rules before it is approved: the description must be between 20 and 125 characters, must include the product brand or model name, must not contain phrases like "image of" or marketing language like "best" or "award-winning", and the AI model's confidence score must be at least 70%. Images that fail these checks are flagged and kept in the ingest area rather than being published.
+Alt-text quality is enforced through the AI model's system prompt rather than through a separate validation step. The system prompt includes specific guidelines that the model follows when generating descriptions: sentences must start with a capital letter and end with a full stop, "image of" and "picture of" phrases are forbidden, marketing hype is not allowed, and the description should be 80–160 characters. Post-processing (the `normalizePunctuation` method) ensures these rules are consistently applied even if the model's output varies slightly. This approach is simpler and more reliable than a separate validation layer, because the model generates compliant text from the start rather than generating text that then needs to be checked and potentially rejected.
 
 ---
 
@@ -105,14 +104,14 @@ While not an Azure service, the guardrails module is a critical pipeline compone
 │              AZURE CONTAINER APPS  (1–5 replicas)               │
 │                                                                  │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────────────┐  │
-│  │ CMS      │  │ Vision   │  │ AI       │  │ Quality        │  │
-│  │ Distiller│─▶│ Hints    │─▶│ Describe │─▶│ Guardrails     │  │
+│  │ CMS      │  │ Vision   │  │ AI       │  │ Translate      │  │
+│  │ Distiller│─▶│ Hints    │─▶│ Describe │─▶│ & Save         │  │
 │  └──────────┘  └──────────┘  └────┬─────┘  └───────┬────────┘  │
 │                                   │                 │           │
 │                                   ▼                 ▼           │
 │                          ┌──────────────┐  ┌──────────────┐    │
-│                          │ AI Foundry   │  │ Translate    │    │
-│                          │ (Phi-4)      │  │ & Save       │    │
+│                          │ AI Foundry   │  │ AI Translator│    │
+│                          │ (Phi-4)      │  │ (EN→NL,FR,JP)│    │
 │                          └──────────────┘  └──────────────┘    │
 └──────────────────────────────────────────────────────────────────┘
            │                         │

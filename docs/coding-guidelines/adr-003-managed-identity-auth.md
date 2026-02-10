@@ -7,7 +7,7 @@ Traditional credential management (API keys, connection strings) creates securit
 
 **Decision:**
 - **Default to managed identity** for all Azure service-to-service communication (no exceptions without security review)
-- Prefer **system-assigned managed identity** wherever possible; use user-assigned only when identity must be shared or reused
+- Use **user-assigned managed identity** (`id-alt-pipeline`) so the same identity is reused across Container Apps, Storage, AI Foundry, and Translator
 - Assign RBAC roles via Bicep at infrastructure creation time
 - Store application secrets in Azure Key Vault; never embed in code or config files
 - Implement least-privilege access: grant only required role permissions
@@ -22,32 +22,27 @@ Traditional credential management (API keys, connection strings) creates securit
 
 **Guides:**
 
-- System-assigned managed identity is the default for Functions, App Services, and Container Apps unless a shared identity is required
+- User-assigned managed identity (`id-alt-pipeline`) is used for Container Apps so the same identity can authenticate to all downstream Azure services (Storage, AI Foundry, Translator)
 
 **PHP Implementation:**
 ```php
-use Azure\Identity\ManagedIdentityCredential;
-use Azure\Storage\Blobs\BlobClient;
+use App\Auth\ManagedIdentityCredential;
 
-$credential = new ManagedIdentityCredential();
-$blobClient = new BlobClient(
-    uri: 'https://mystorageaccount.blob.core.windows.net/container',
-    credential: $credential
-);
+$credential = new ManagedIdentityCredential(clientId: $env['AZURE_CLIENT_ID']);
+$token = $credential->getToken('https://storage.azure.com/.default');
 ```
 
 **Bicep Configuration:**
 ```bicep
-resource functionApp 'Microsoft.Web/sites@2021-02-01' = {
-  identity: { type: 'SystemAssigned' }
-  // ...
+resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
+  name: 'id-alt-pipeline'
+  location: location
 }
 
-resource roleAssignment 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
-  scope: storageAccount
-  properties: {
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '2c34c05e-6d7d-4a8f-bc07-48857e7c0f51')
-    principalId: functionApp.identity.principalId
+resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
+  identity: {
+    type: 'UserAssigned'
+    userAssignedIdentities: { '${managedIdentity.id}': {} }
   }
 }
 ```

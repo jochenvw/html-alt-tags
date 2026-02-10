@@ -3,16 +3,10 @@
     "image": "img_7.png",
     "source": "public website",
     "altText": {
-        "en": "eotank ink bottle with 63 cartridges",
-        "jp": "eotank\u30a4\u30f3\u30af\u30dc\u30c8\u30eb(63\u30ab\u30fc\u30c8\u30ea\u30c3\u30b8\u5165\u308a)",
-        "nl": "EOTANK inktfles met 63 patronen",
-        "fr": "Bouteille d\u2019encre eotank avec 63 cartouches"
+        "en": "Ink bottle with black ink cartridge in a trash can.",
+        "jp": "\u30b4\u30df\u7bb1\u306e\u4e2d\u306e\u9ed2\u30a4\u30f3\u30af\u30ab\u30fc\u30c8\u30ea\u30c3\u30b8\u5165\u308a\u30a4\u30f3\u30af\u74f6\u3002",
+        "nl": "Inktfles met zwarte inktcartridge in een prullenbak.",
+        "fr": "Encrier avec cartouche noire dans une poubelle."
     },
-    "confidence": 0.6,
-    "policyCompliant": false,
-    "violations": [
-        "missing_brand_model",
-        "low_confidence"
-    ],
-    "generatedAt": "2026-02-10T08:05:06+00:00"
+    "generatedAt": "2026-02-10T12:22:55+00:00"
 }

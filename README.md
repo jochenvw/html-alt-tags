@@ -8,9 +8,9 @@ Automatically generates accessible, SEO-friendly HTML alt text for product image
 
 1. **Upload** - Drop image + YAML metadata into Azure Storage `/ingest` container
 2. **Trigger** - Event Grid detects upload and calls Container App webhook
-3. **Process** - PHP handler uses Phi-4 to generate alt-text in multiple languages
-4. **Validate** - Guardrails check compliance (brand+model required, length limits, no marketing fluff)
-5. **Output** - JSON sidecar written to storage, blob tags set, approved assets copied to `/public`
+3. **Describe** - Phi-4-multimodal-instruct analyses the image and generates alt text in English
+4. **Translate** - Azure AI Translator converts the alt text into configured languages
+5. **Output** - JSON sidecar written to storage, blob tags set, assets copied to `/public`
 
 ```
 📤 Upload (img.png + img.yml)
@@ -21,11 +21,11 @@ Automatically generates accessible, SEO-friendly HTML alt text for product image
     ↓
 🐳 Container App (PHP)
     ↓
-🤖 Phi-4 Foundry
+🤖 Phi-4 Foundry → Describe
     ↓
-✅ Alt-Text Generated
+🌐 Azure Translator → Translate
     ↓
-📄 JSON + Tags + Public Copy
+📄 JSON Sidecar + Blob Tags + Public Copy
 ```
 
 ## Key Features
@@ -34,7 +34,7 @@ Automatically generates accessible, SEO-friendly HTML alt text for product image
 - **Multi-language** - Translate to any configured languages (via Azure AI Translator)
 - **Reactive** - Event-driven processing (no batch jobs)
 - **Pluggable** - Switch between Phi-4, GPT-4, Azure Vision, or Azure Translator
-- **Compliant** - Strict rules: 80-160 chars, brand+model required, no fluff
+- **Quality prompts** - Source-specific system prompts with 4-shot learning for consistent output
 - **Zero credentials** - Managed Identity for all service-to-service auth
 - **Serverless** - Scales automatically, pay per use
 
@@ -140,17 +140,12 @@ Generate alt-text for an image:
 **Response:**
 ```json
 {
-  "status": "ok",
-  "tenant_id": "your-tenant-id",
-  "altJson": {
-    "image": "img_0.png",
-    "altText": {
-      "en": "Epson EcoTank L3560 A4 multifunction ink tank printer, front view",
-      "nl": "Epson EcoTank L3560 A4 multifunctie-printer...",
-      "fr": "Imprimante multifonction EcoTank Epson L3560..."
-    },
-    "confidence": 0.89,
-    "policyCompliant": true
+  "status": "processed",
+  "blob": "img_0.png",
+  "altText": {
+    "en": "Epson EcoTank L3560 A4 multifunction ink tank printer in black.",
+    "nl": "Epson EcoTank L3560 A4 multifunctie-inkttankprinter in zwart.",
+    "fr": "Imprimante multifonction Epson EcoTank L3560 pour réservoir d'encre en noir."
   }
 }
 ```
@@ -217,6 +212,7 @@ eventgrid-status
 - **[System Design](docs/system-design.md)** — Components, architecture diagram, bill of materials, and cost estimate
 - **[Security Architecture](docs/security-architecture.md)** — Authentication, Managed Identity, RBAC, and external upload guidance
 - **[AI Prompt Design](docs/ai-prompt-design.md)** — How context is assembled and sent to Phi-4
+- **[Pipeline Results](docs/pipeline-results.md)** — Test run output with images, alt texts, translations, and quality analysis
 - **[Coding Guidelines](docs/coding-guidelines/)** — ADRs for PHP standards, Bicep IaC, auth, and code style
 - **[System Prompt Rules](prompts/public_website_system_prompt.md)** — Alt-text generation guidelines
 - **[Application Code README](src/functions/AltPipeline.Function/App/README.md)** — Code architecture
