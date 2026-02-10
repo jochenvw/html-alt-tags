@@ -31,26 +31,25 @@ Automatically generates accessible, SEO-friendly HTML alt text for product image
 ## Key Features
 
 - **Multimodal AI** - Phi-4-multimodal-instruct for vision + text understanding
-- **Multi-language** - Translate to any configured languages
+- **Multi-language** - Translate to any configured languages (via Azure AI Translator)
 - **Reactive** - Event-driven processing (no batch jobs)
-- **Pluggable** - Switch between Phi-4, GPT-4, GPT-3.5, or Azure Vision
+- **Pluggable** - Switch between Phi-4, GPT-4, Azure Vision, or Azure Translator
 - **Compliant** - Strict rules: 80-160 chars, brand+model required, no fluff
-- **Multi-tenant** - Support for users across multiple Azure AD tenants
+- **Zero credentials** - Managed Identity for all service-to-service auth
 - **Serverless** - Scales automatically, pay per use
 
 ## Assumptions
 
 This pipeline assumes you have:
 
-✅ **Azure Foundry Access** - Phi-4-multimodal-instruct endpoint via Azure API Management  
+✅ **Azure Foundry Access** - Phi-4-multimodal-instruct endpoint via Azure AI Foundry  
 ✅ **Azure Subscription** - With permissions to create Container Apps, Storage, ACR  
-✅ **Tenant ID** - For authentication (supports multi-tenant scenarios)  
 ✅ **Regional Deployment** - Defaults to `swedencentral`
 
 **Optional (fallback strategies):**
-- Azure OpenAI (GPT-3.5/GPT-4) for alternative description/translation
-- Azure AI Vision for image-only analysis
-- Azure AI Translator for dedicated translation service
+- Azure OpenAI (GPT-4) for alternative description/translation
+- Azure AI Vision for image-only captioning
+- Azure AI Translator for dedicated translation (default translator)
 
 ## Quick Start
 
@@ -67,41 +66,30 @@ cd scripts
 
 ## Architecture
 
-**Services:**
-- **Azure Container Apps** - Host PHP handler (serverless, auto-scaling)
-- **Azure Storage** - Blob containers (ingest/public) + Event Grid source
-- **Azure Container Registry** - Store container images (cloud-built)
-- **Azure Foundry** - Phi-4-multimodal-instruct API via API Management
-- **Event Grid** - React to blob uploads with webhook triggers
-- **Managed Identity** - Secure access to ACR and Storage (no secrets)
+For a detailed walkthrough of every component, see **[System Design](docs/system-design.md)** (includes bill of materials and cost estimate).
 
-**Technology:**
-- PHP 8.3 (modern, performant, great for serverless)
-- Bicep (Infrastructure as Code)
-- Composer (dependency management)
-- PHPUnit (testing)
+**Services:** Azure Container Apps, Blob Storage, Event Grid, AI Foundry (Phi-4), AI Translator, Computer Vision, Container Registry, Log Analytics, Managed Identity.
+
+**Technology:** PHP 8.3, Bicep (IaC), Composer, PHPUnit.
 
 ## Configuration
 
-Minimal `.env` setup:
+Key environment variables (set automatically by Bicep deployment):
 
 ```bash
-# AI Strategy (phi4 | slm | llm | vision)
-DESCRIBER=strategy:phi4
-TRANSLATOR=strategy:phi4
+# AI Strategy
+DESCRIBER=strategy:slm           # Phi-4 via AI Foundry (default)
+TRANSLATOR=strategy:translator   # Azure AI Translator (default)
 
-# Azure Foundry
-AZURE_FOUNDRY_ENDPOINT=https://your-gateway.azure-api.net/.../chat/completions
-AZURE_FOUNDRY_KEY=your-api-key
-AZURE_REGION=swedencentral
-
-# Multi-Tenant
-AZURE_TENANT_ID=your-tenant-id
-MULTI_TENANT_ENABLED=true
+# Azure AI Foundry
+AZURE_FOUNDRY_ENDPOINT=https://your-foundry.cognitiveservices.azure.com
+AZURE_FOUNDRY_DEPLOYMENT_SLM=Phi-4-multimodal-instruct
 
 # Languages
 LOCALES=EN,NL,FR
 ```
+
+Authentication uses **Managed Identity** — no API keys or secrets in configuration. See **[Security Architecture](docs/security-architecture.md)** for details.
 
 ## Project Structure
 
@@ -204,13 +192,9 @@ source scripts/utils.sh
 
 ## System Prompt
 
-Alt-text follows strict rules from [`prompts/public_website_system_prompt.md`](prompts/public_website_system_prompt.md):
+Alt-text generation is driven by source-specific system prompts that are selected based on the YAML sidecar's `source` field. For a full explanation of how context is assembled and sent to Phi-4, see **[AI Prompt Design](docs/ai-prompt-design.md)**.
 
-- ✅ **Visual-first** - Describe what's visible before context
-- ✅ **Brand + Model required** - Always include (e.g., "Epson EcoTank L3560")
-- ✅ **80-160 chars** - Target range (hard limit: 125)
-- ❌ **No fluff** - Forbidden: "image of", "picture of", marketing hype
-- ❌ **No invention** - Only visible content + metadata
+Core rules: visual-first descriptions, brand+model required, 80–160 chars, no "image of", no marketing hype.
 
 ## Monitoring
 
@@ -229,9 +213,13 @@ eventgrid-status
 
 ## Documentation
 
-- **[Getting Started Guide](GETTING_STARTED.md)** - Deployment and usage
-- **[System Prompt Rules](prompts/public_website_system_prompt.md)** - Alt-text generation guidelines
-- **[Application Code README](src/functions/AltPipeline.Function/App/README.md)** - Code architecture
+- **[Getting Started Guide](GETTING_STARTED.md)** — Deployment and usage
+- **[System Design](docs/system-design.md)** — Components, architecture diagram, bill of materials, and cost estimate
+- **[Security Architecture](docs/security-architecture.md)** — Authentication, Managed Identity, RBAC, and external upload guidance
+- **[AI Prompt Design](docs/ai-prompt-design.md)** — How context is assembled and sent to Phi-4
+- **[Coding Guidelines](docs/coding-guidelines/)** — ADRs for PHP standards, Bicep IaC, auth, and code style
+- **[System Prompt Rules](prompts/public_website_system_prompt.md)** — Alt-text generation guidelines
+- **[Application Code README](src/functions/AltPipeline.Function/App/README.md)** — Code architecture
 
 ## Contributing
 
