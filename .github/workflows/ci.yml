@@ -1,0 +1,82 @@
+name: CI - Lint, Test, Build, Push
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  REGISTRY: ${{ secrets.ACR_REGISTRY }}
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./src/functions/AltPipeline.Function
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: curl, json, mbstring
+          tools: composer:2.6
+
+      - name: Cache Composer packages
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Lint PHP files
+        run: |
+          find . -type f -name "*.php" ! -path "./vendor/*" -exec php -l {} \; | grep -v "No syntax errors" && exit 1 || true
+
+      - name: Run PHPUnit tests
+        run: ./vendor/bin/phpunit
+
+  build-and-push:
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to ACR
+        if: github.event_name == 'push'
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ env.REGISTRY }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./containers/php-handler
+          push: ${{ github.event_name == 'push' }}
+          tags: |
+            ${{ env.REGISTRY }}/php-handler:latest
+            ${{ env.REGISTRY }}/php-handler:${{ github.sha }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/php-handler:buildcache
+          cache-to: type=registry,ref=${{ env.REGISTRY }}/php-handler:buildcache,mode=max
+
+      - name: Post image build info
+        if: github.event_name == 'push'
+        run: |
+          echo "✅ Pushed image: ${{ env.REGISTRY }}/php-handler:${{ github.sha }}"

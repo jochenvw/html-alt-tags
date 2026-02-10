@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storageAccountName": {
+      "value": "alttxtst"
+    },
+    "containerAppName": {
+      "value": "php-handler"
+    },
+    "containerAppEnvName": {
+      "value": "alt-text-env"
+    },
+    "location": {
+      "value": "swedencentral"
+    },
+    "containerImageName": {
+      "value": "php-handler"
+    },
+    "containerImageTag": {
+      "value": "latest"
+    },
+    "containerRegistry": {
+      "value": "yourregistry.azurecr.io"
+    },
+    "containerAppRegion": {
+      "value": "swedencentral"
+    },
+    "skipEventGrid": {
+      "value": true
+    },
+    "foundryEndpoint": {
+      "value": "https://jvw-foundry-sandbox.cognitiveservices.azure.com"
+    },
+    "foundryDeploymentSlm": {
+      "value": "Phi-4-multimodal-instruct"
+    }
+  }
+}

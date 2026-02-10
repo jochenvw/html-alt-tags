@@ -1,0 +1,18 @@
+{
+    "asset": "img_5.png",
+    "image": "img_5.png",
+    "source": "public website",
+    "altText": {
+        "en": "save up to 95% on ink costs with Epson printer",
+        "jp": "\u30a8\u30d7\u30bd\u30f3\u30d7\u30ea\u30f3\u30bf\u30fc\u3067\u30a4\u30f3\u30af\u4ee3\u3092\u6700\u592795%\u7bc0\u7d04",
+        "nl": "bespaar tot 95% op inktkosten met een Epson-printer",
+        "fr": "\u00c9conomiser jusqu\u2019\u00e0 95 % sur les co\u00fbts d\u2019encre avec l\u2019imprimante Epson"
+    },
+    "confidence": 0.6,
+    "policyCompliant": false,
+    "violations": [
+        "missing_brand_model",
+        "low_confidence"
+    ],
+    "generatedAt": "2026-02-10T08:05:06+00:00"
+}

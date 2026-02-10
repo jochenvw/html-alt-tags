@@ -1,0 +1,18 @@
+{
+    "asset": "img_0.png",
+    "image": "img_0.png",
+    "source": "public website",
+    "altText": {
+        "en": "Epson EcoTank L3560 multifunction ink tank printer in black",
+        "jp": "\u30a8\u30d7\u30bd\u30f3 EcoTank L3560 \u591a\u6a5f\u80fd\u30a4\u30f3\u30af\u30bf\u30f3\u30af\u30d7\u30ea\u30f3\u30bf\u30fc \u9ed2",
+        "nl": "Epson EcoTank L3560 multifunctionele inkttankprinter in zwart",
+        "fr": "Imprimante multifonction Epson EcoTank L3560 pour r\u00e9servoir d\u2019encre en noir"
+    },
+    "confidence": 0.6,
+    "policyCompliant": false,
+    "violations": [
+        "missing_brand_model",
+        "low_confidence"
+    ],
+    "generatedAt": "2026-02-10T08:05:00+00:00"
+}

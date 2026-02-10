@@ -1,0 +1,79 @@
+name: Deploy - Bicep & Update ACA
+
+on:
+  workflow_run:
+    workflows: [ "CI - Lint, Test, Build, Push" ]
+    types: [ completed ]
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      azure_resource_group:
+        description: 'Azure Resource Group name'
+        required: true
+      azure_region:
+        description: 'Azure region'
+        required: true
+        default: 'eastus'
+
+env:
+  REGISTRY: ${{ secrets.ACR_REGISTRY }}
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Validate Bicep
+        uses: azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ secrets.AZURE_RESOURCE_GROUP }}
+          region: ${{ secrets.AZURE_REGION }}
+          template: ./infra/bicep/main.bicep
+          parameters: ./infra/bicep/parameters.json containerImageTag=${{ github.sha }}
+          deploymentMode: Validate
+
+      - name: Deploy Bicep
+        uses: azure/arm-deploy@v1
+        id: deploy
+        with:
+          scope: resourcegroup
+          resourceGroupName: ${{ secrets.AZURE_RESOURCE_GROUP }}
+          region: ${{ secrets.AZURE_REGION }}
+          template: ./infra/bicep/main.bicep
+          parameters: ./infra/bicep/parameters.json containerImageTag=${{ github.sha }}
+          deploymentMode: Incremental
+
+      - name: Update ACA image
+        run: |
+          az containerapp update \
+            --name php-handler \
+            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+            --image ${{ env.REGISTRY }}/php-handler:${{ github.sha }}
+
+      - name: Verify Event Grid subscription
+        run: |
+          az eventgrid event-subscription list \
+            --source-resource-id /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.AZURE_RESOURCE_GROUP }}/providers/Microsoft.Storage/storageAccounts/${{ steps.deploy.outputs.storageAccountName }} \
+            --output table
+
+      - name: Post deployment info
+        if: success()
+        run: |
+          echo "✅ Deployment complete!"
+          echo "🔗 ACA Endpoint: ${{ steps.deploy.outputs.acaFqdn }}"
+          echo "📦 Storage Account: ${{ steps.deploy.outputs.storageAccountName }}"
