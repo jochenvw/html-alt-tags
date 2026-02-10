@@ -3,10 +3,28 @@
     "image": "img_1.png",
     "source": "public website",
     "altText": {
-        "en": "Epson ink tank printer ecoTank L3560 a4 multifunction printer.",
-        "jp": "\u30a8\u30d7\u30bd\u30f3\u306e\u30a4\u30f3\u30af\u30bf\u30f3\u30af\u30d7\u30ea\u30f3\u30bf\u30fc\u3001ecoTank L3560 a4\u3001\u591a\u6a5f\u80fd\u30d7\u30ea\u30f3\u30bf\u30fc\u3002",
-        "nl": "Epson inkttankprinter ecoTank L3560 a4 multifunctionele printer.",
-        "fr": "Imprimante \u00e0 r\u00e9servoir d\u2019encre Epson EcoTank L3560 A4 imprimante multifonction."
+        "en": "Ink tank printer Epson L3560 a4 multifunction printer.",
+        "de": "Tintenbeh\u00e4lterdrucker Epson L3560 A4 Multifunktionsdrucker.",
+        "fr": "Imprimante \u00e0 r\u00e9servoir d\u2019encre Epson L3560 a4 imprimante multifonction.",
+        "it": "Stampante a serbatoio d'inchiostro Epson L3560 a4 multifunzionale.",
+        "es": "Impresora tanque de tinta Impresora multifunci\u00f3n Epson L3560 a4.",
+        "pt": "Impressora tanque de tinta Epson L3560 a4 multifuncional.",
+        "nl": "Inkttankprinter Epson L3560 a4 multifunctionele printer.",
+        "da": "Bl\u00e6kbeholderprinter Epson L3560 a4 multifunktionsprinter.",
+        "fi": "Mustes\u00e4ili\u00f6n tulostin Epson L3560 a4 monitoimitulostin.",
+        "sv": "Bl\u00e4cktanksskrivare Epson L3560 A4 multifunktionsskrivare.",
+        "nb": "Blekktankskriver Epson L3560 A4 multifunksjonsskriver.",
+        "bg": "\u041f\u0440\u0438\u043d\u0442\u0435\u0440 \u0441 \u043c\u0430\u0441\u0442\u0438\u043b\u0435\u043d \u0440\u0435\u0437\u0435\u0440\u0432\u043e\u0430\u0440 Epson L3560 a4 \u043c\u043d\u043e\u0433\u043e\u0444\u0443\u043d\u043a\u0446\u0438\u043e\u043d\u0430\u043b\u0435\u043d \u043f\u0440\u0438\u043d\u0442\u0435\u0440.",
+        "hr": "Pisa\u010d s tintom Epson L3560 a4 vi\u0161enamjenski pisa\u010d.",
+        "cs": "Tisk\u00e1rna s inkoustem Epson L3560 a4 multifunk\u010dn\u00ed tisk\u00e1rna.",
+        "et": "Tindipaagi printer Epson L3560 a4 multifunktsionaalne printer.",
+        "el": "\u0395\u03ba\u03c4\u03c5\u03c0\u03c9\u03c4\u03ae\u03c2 \u03b4\u03b5\u03be\u03b1\u03bc\u03b5\u03bd\u03ae\u03c2 \u03bc\u03b5\u03bb\u03b1\u03bd\u03b9\u03bf\u03cd \u03a0\u03bf\u03bb\u03c5\u03bb\u03b5\u03b9\u03c4\u03bf\u03c5\u03c1\u03b3\u03b9\u03ba\u03cc\u03c2 \u03b5\u03ba\u03c4\u03c5\u03c0\u03c9\u03c4\u03ae\u03c2 Epson L3560 a4.",
+        "hu": "Tintatart\u00e1ly nyomtat\u00f3 Epson L3560 a4 t\u00f6bbfunkci\u00f3s nyomtat\u00f3.",
+        "lv": "Tintes tvertnes printeris Epson L3560 A4 daudzfunkcion\u0101lais printeris.",
+        "lt": "Ra\u0161alo talpyklos spausdintuvas Epson L3560 a4 daugiafunkcis spausdintuvas.",
+        "pl": "Drukarka z atramentem Epson L3560 a4 wielofunkcyjna.",
+        "ro": "Imprimant\u0103 cu rezervor de cerneal\u0103 Epson L3560 a4, imprimant\u0103 multifunc\u021bional\u0103.",
+        "sr": "\u0160tampa\u010d sa mastilom Epson L3560 a4 multifunkcionalni \u0161tampa\u010d."
     },
-    "generatedAt": "2026-02-10T12:23:44+00:00"
+    "generatedAt": "2026-02-10T13:52:32+00:00"
 }

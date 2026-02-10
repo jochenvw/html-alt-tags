@@ -4,9 +4,27 @@
     "source": "public website",
     "altText": {
         "en": "Colorful Epson ink tank printer.",
-        "jp": "\u30ab\u30e9\u30d5\u30eb\u306a\u30a8\u30d7\u30bd\u30f3\u30a4\u30f3\u30af\u30bf\u30f3\u30af\u30d7\u30ea\u30f3\u30bf\u30fc\u3002",
+        "de": "Bunter Epson-Tintentankdrucker.",
+        "fr": "Imprimante Epson color\u00e9e pour r\u00e9servoir d\u2019encre.",
+        "it": "Stampante colorata per serbatoi d'inchiostro Epson.",
+        "es": "Impresora de tintas Epson de colores.",
+        "pt": "Impressora colorida Epson para tanque de tinta.",
         "nl": "Kleurrijke Epson inkttankprinter.",
-        "fr": "Imprimante Epson color\u00e9e pour r\u00e9servoir d\u2019encre."
+        "da": "Farverig Epson bl\u00e6ktankprinter.",
+        "fi": "V\u00e4rik\u00e4s Epson-mustes\u00e4ili\u00f6n tulostin.",
+        "sv": "F\u00e4rgglad Epson bl\u00e4cktankskrivare.",
+        "nb": "Fargerik Epson blekktankskriver.",
+        "bg": "\u0426\u0432\u0435\u0442\u0435\u043d \u043f\u0440\u0438\u043d\u0442\u0435\u0440 \u0437\u0430 \u043c\u0430\u0441\u0442\u0438\u043b\u043e Epson.",
+        "hr": "\u0160areni Epson printer s tintom.",
+        "cs": "Barevn\u00e1 tisk\u00e1rna Epson na inkoustovou n\u00e1dr\u017e.",
+        "et": "V\u00e4rvikas Epsoni tinditanki printer.",
+        "el": "\u03a0\u03bf\u03bb\u03cd\u03c7\u03c1\u03c9\u03bc\u03bf\u03c2 \u03b5\u03ba\u03c4\u03c5\u03c0\u03c9\u03c4\u03ae\u03c2 \u03b4\u03b5\u03be\u03b1\u03bc\u03b5\u03bd\u03ce\u03bd \u03bc\u03b5\u03bb\u03b1\u03bd\u03b9\u03bf\u03cd Epson.",
+        "hu": "Sz\u00ednes Epson tintatart\u00e1ly nyomtat\u00f3.",
+        "lv": "Kr\u0101sains Epson tintes tvertnes printeris.",
+        "lt": "Spalvingas \"Epson\" ra\u0161alo talpyklos spausdintuvas.",
+        "pl": "Kolorowa drukarka atramentowa Epson.",
+        "ro": "Imprimant\u0103 colorat\u0103 Epson pentru rezervor de cerneal\u0103.",
+        "sr": "\u0160areni Epson \u0161tampa\u010d sa mastilom."
     },
-    "generatedAt": "2026-02-10T12:23:52+00:00"
+    "generatedAt": "2026-02-10T13:52:27+00:00"
 }

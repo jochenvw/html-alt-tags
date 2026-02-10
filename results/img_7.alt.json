@@ -3,10 +3,28 @@
     "image": "img_7.png",
     "source": "public website",
     "altText": {
-        "en": "Ink bottle with black ink cartridge in a trash can.",
-        "jp": "\u30b4\u30df\u7bb1\u306e\u4e2d\u306e\u9ed2\u30a4\u30f3\u30af\u30ab\u30fc\u30c8\u30ea\u30c3\u30b8\u5165\u308a\u30a4\u30f3\u30af\u74f6\u3002",
-        "nl": "Inktfles met zwarte inktcartridge in een prullenbak.",
-        "fr": "Encrier avec cartouche noire dans une poubelle."
+        "en": "Ink bottle with a face and arms holding a cartridge above a trash can.",
+        "de": "Tintenflasche mit Gesicht und Armen, die eine Patrone \u00fcber einem M\u00fclleimer halten.",
+        "fr": "Une bouteille d\u2019encre avec un visage et des bras tenant une cartouche au-dessus d\u2019une poubelle.",
+        "it": "Flacon d'inchiostro con un volto e braccia che tengono una cartuccia sopra un bidone della spazzatura.",
+        "es": "Tintero con cara y brazos sujetando un cartucho encima de un cubo de basura.",
+        "pt": "Garrafa de tinta com um rosto e bra\u00e7os segurando um cartucho acima de uma lixeira.",
+        "nl": "Inktfles met een gezicht en armen die een cartridge boven een vuilnisbak vasthouden.",
+        "da": "Bl\u00e6kflaske med ansigt og arme holder en patron over en skraldespand.",
+        "fi": "Mustepullo, jossa on kasvot ja k\u00e4det, jossa patruuna on roskiksen yl\u00e4puolella.",
+        "sv": "Bl\u00e4ckflaska med ansikte och armar som h\u00e5ller en patron ovanf\u00f6r en soptunna.",
+        "nb": "Blekkflaske med ansikt og armer som holder en patron over en s\u00f8ppelb\u00f8tte.",
+        "bg": "\u041c\u0430\u0441\u0442\u0438\u043b\u043d\u0438\u0446\u0430 \u0441 \u043b\u0438\u0446\u0435 \u0438 \u0440\u044a\u0446\u0435, \u0434\u044a\u0440\u0436\u0430\u0449\u0438 \u043a\u0430\u0441\u0435\u0442\u0430 \u043d\u0430\u0434 \u043a\u043e\u0448\u0447\u0435\u0442\u043e \u0437\u0430 \u0431\u043e\u043a\u043b\u0443\u043a.",
+        "hr": "Bo\u010dica tinte s licem i rukama koje dr\u017ee spremnik iznad kante za sme\u0107e.",
+        "cs": "Lahvi\u010dka s inkoustem s obli\u010dejem a pa\u017eemi dr\u017e\u00ed kazetu nad odpadkov\u00fdm ko\u0161em.",
+        "et": "Tindipudel, millel on n\u00e4gu ja k\u00e4ed, mis hoiavad kassetti pr\u00fcgikasti kohal.",
+        "el": "\u039c\u03c0\u03bf\u03c5\u03ba\u03ac\u03bb\u03b9 \u03bc\u03b5\u03bb\u03b1\u03bd\u03b9\u03bf\u03cd \u03bc\u03b5 \u03c0\u03c1\u03cc\u03c3\u03c9\u03c0\u03bf \u03ba\u03b1\u03b9 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c0\u03bf\u03c5 \u03ba\u03c1\u03b1\u03c4\u03bf\u03cd\u03bd \u03ad\u03bd\u03b1 \u03c6\u03c5\u03c3\u03af\u03b3\u03b3\u03b9\u03bf \u03c0\u03ac\u03bd\u03c9 \u03b1\u03c0\u03cc \u03ad\u03bd\u03b1\u03bd \u03ba\u03ac\u03b4\u03bf \u03b1\u03c0\u03bf\u03c1\u03c1\u03b9\u03bc\u03bc\u03ac\u03c4\u03c9\u03bd.",
+        "hu": "Tintapalack, amelyen az arc \u00e9s karok egy kazett\u00e1t tartanak a szemetes f\u00f6l\u00f6tt.",
+        "lv": "Tintes pudele ar seju un rok\u0101m, kas tur k\u0101rtrid\u017eu virs atkritumu tvertnes.",
+        "lt": "Ra\u0161alo buteliukas su veidu ir rankomis, laikan\u010diais kaset\u0119 vir\u0161 \u0161iuk\u0161liad\u0117\u017e\u0117s.",
+        "pl": "Butelka z atramentem z twarz\u0105 i ramionami trzymaj\u0105cymi wk\u0142ad nad koszem na \u015bmieci.",
+        "ro": "Sticl\u0103 de cerneal\u0103 cu fa\u021b\u0103 \u0219i bra\u021be care \u021bin un cartu\u0219 deasupra unui co\u0219 de gunoi.",
+        "sr": "Bo\u010dica sa mastilom sa licem i rukama koje dr\u017ee kertrid\u017e iznad kante za sme\u0107e."
     },
-    "generatedAt": "2026-02-10T12:22:55+00:00"
+    "generatedAt": "2026-02-10T13:52:42+00:00"
 }

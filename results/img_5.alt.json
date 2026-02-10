@@ -3,10 +3,28 @@
     "image": "img_5.png",
     "source": "public website",
     "altText": {
-        "en": "Epson eco tank ink cost savings.",
-        "jp": "\u30a8\u30d7\u30bd\u30f3\u30fb\u30a8\u30b3\u30bf\u30f3\u30af\u30a4\u30f3\u30af\u306e\u30b3\u30b9\u30c8\u524a\u6e1b\u3002",
-        "nl": "Epson Eco tank inkt bespaart kosten.",
-        "fr": "\u00c9conomies de co\u00fbts pour l\u2019encre Epson Eco Tank."
+        "en": "Epson ink tank printer saving up to 95% on ink costs.",
+        "de": "Epson Tintentankdrucker sparen bis zu 95 % bei den Tintenkosten.",
+        "fr": "Imprimante \u00e0 r\u00e9servoir d\u2019encre Epson qui permet d\u2019\u00e9conomiser jusqu\u2019\u00e0 95 % sur le co\u00fbt de l\u2019encre.",
+        "it": "Stampante per serbatoio d'inchiostro Epson che fa risparmiare fino al 95% sui costi dell'inchiostro.",
+        "es": "Impresora Epson para tanque de tinta que ahorra hasta un 95% en costes de tinta.",
+        "pt": "Impressora tanque de tinta Epson economizando at\u00e9 95% no custo da tinta.",
+        "nl": "Epson inktankprinter bespaart tot 95% op inktkosten.",
+        "da": "Epson bl\u00e6ktankprinter sparer op til 95% p\u00e5 bl\u00e6komkostningerne.",
+        "fi": "Epson-mustes\u00e4ili\u00f6n tulostin s\u00e4\u00e4st\u00e4\u00e4 jopa 95 % mustekustannuksissa.",
+        "sv": "Epson bl\u00e4cktankskrivare sparar upp till 95 % p\u00e5 bl\u00e4ckkostnaderna.",
+        "nb": "Epson blekktankskriver sparer opptil 95 % p\u00e5 blekkkostnadene.",
+        "bg": "Epson \u043f\u0440\u0438\u043d\u0442\u0435\u0440 \u0441 \u043c\u0430\u0441\u0442\u0438\u043b\u0435\u043d\u0438 \u0440\u0435\u0437\u0435\u0440\u0432\u043e\u0430\u0440\u0438, \u0441\u043f\u0435\u0441\u0442\u044f\u0432\u0430\u0439\u043a\u0438 \u0434\u043e 95% \u043e\u0442 \u0440\u0430\u0437\u0445\u043e\u0434\u0438\u0442\u0435 \u0437\u0430 \u043c\u0430\u0441\u0442\u0438\u043b\u043e.",
+        "hr": "Epson tintni spremnik za pisa\u010d \u0161tedi do 95% na tro\u0161kovima tinte.",
+        "cs": "Epson inkoustov\u00e1 tankov\u00e1 tisk\u00e1rna u\u0161et\u0159\u00ed a\u017e 95 % na n\u00e1kladech na inkoust.",
+        "et": "Epsoni tinditanki printeri kokkuhoid kuni 95% tindikuludelt.",
+        "el": "\u039f \u03b5\u03ba\u03c4\u03c5\u03c0\u03c9\u03c4\u03ae\u03c2 \u03bc\u03b5 \u03b4\u03bf\u03c7\u03b5\u03af\u03b1 \u03bc\u03b5\u03bb\u03b1\u03bd\u03b9\u03bf\u03cd Epson \u03b5\u03be\u03bf\u03b9\u03ba\u03bf\u03bd\u03bf\u03bc\u03b5\u03af \u03ad\u03c9\u03c2 \u03ba\u03b1\u03b9 95% \u03c3\u03c4\u03bf \u03ba\u03cc\u03c3\u03c4\u03bf\u03c2 \u03bc\u03b5\u03bb\u03b1\u03bd\u03b9\u03bf\u03cd.",
+        "hu": "Az Epson tintatart\u00e1ly nyomtat\u00f3 ak\u00e1r 95%-ot is megtakar\u00edt a tintak\u00f6lts\u00e9gen.",
+        "lv": "Epson tintes tvertnes printeris ietaupa l\u012bdz pat 95% tintes izmaks\u0101m.",
+        "lt": "\"Epson\" ra\u0161alo talpyklos spausdintuvas sutaupo iki 95 % ra\u0161alo s\u0105naud\u0173.",
+        "pl": "Drukarka atramentowa Epson Ink Tank pozwala zaoszcz\u0119dzi\u0107 nawet do 95% na kosztach tuszu.",
+        "ro": "Imprimant\u0103 Epson pentru rezervor de cerneal\u0103 economise\u0219te p\u00e2n\u0103 la 95% la costurile cernelii.",
+        "sr": "Epson \u0161tampa\u010d sa mastilom \u0161tedi do 95% na tro\u0161kove mastila."
     },
-    "generatedAt": "2026-02-10T12:22:55+00:00"
+    "generatedAt": "2026-02-10T13:54:27+00:00"
 }

@@ -3,10 +3,28 @@
     "image": "img_8.png",
     "source": "public website",
     "altText": {
-        "en": "Epson EcoTank L3560 multifunction ink tank printer in black with 3 years of ink included.",
-        "jp": "Epson EcoTank L3560 \u30de\u30eb\u30c1\u30d5\u30a1\u30f3\u30af\u30b7\u30e7\u30f3\u30a4\u30f3\u30af\u30bf\u30f3\u30af\u30d7\u30ea\u30f3\u30bf\u30fc(\u9ed2\u30013\u5e74\u5206\u306e\u30a4\u30f3\u30af\u540c\u68b1)\u3002",
-        "nl": "Epson EcoTank L3560 multifunctionele inkttankprinter in zwart met 3 jaar inkt inbegrepen.",
-        "fr": "Epson EcoTank L3560 imprimante multifonction pour r\u00e9servoir d\u2019encre noire avec 3 ans d\u2019encre incluse."
+        "en": "Epson inkjet printer with 3 years of ink included.",
+        "de": "Epson Tintenstrahldrucker mit 3 Jahren Tinte dabei.",
+        "fr": "Imprimante jet d\u2019encre Epson avec 3 ans d\u2019encre incluse.",
+        "it": "Stampante a getto d'inchiostro Epson con 3 anni di inchiostro inclusi.",
+        "es": "Impresora de inyecci\u00f3n de tinta Epson con 3 a\u00f1os de tinta incluidos.",
+        "pt": "Impressora jato de tinta Epson com 3 anos de tinta inclu\u00eddos.",
+        "nl": "Epson inkjetprinter met 3 jaar inkt inbegrepen.",
+        "da": "Epson inkjetprinter med 3 \u00e5rs ink inkluderet.",
+        "fi": "Epson-mustesuihkutulostin, johon sis\u00e4ltyy 3 vuoden muste.",
+        "sv": "Epson bl\u00e4ckstr\u00e5leskrivare med 3 \u00e5rs bl\u00e4ck inkluderat.",
+        "nb": "Epson blekkskriverskriver med 3 \u00e5rs blekk inkludert.",
+        "bg": "Epson \u043c\u0430\u0441\u0442\u0438\u043b\u0435\u043d\u043e\u0441\u0442\u0440\u0443\u0435\u043d \u043f\u0440\u0438\u043d\u0442\u0435\u0440 \u0441 3 \u0433\u043e\u0434\u0438\u043d\u0438 \u043c\u0430\u0441\u0442\u0438\u043b\u043e.",
+        "hr": "Epson inkjet pisa\u010d s 3 godine tinte.",
+        "cs": "Epson inkoustov\u00e1 tisk\u00e1rna s 3 roky inkoustu v cen\u011b.",
+        "et": "Epsoni tindiprinter, millel on 3 aastat tinti.",
+        "el": "\u0395\u03ba\u03c4\u03c5\u03c0\u03c9\u03c4\u03ae\u03c2 inkjet Epson \u03bc\u03b5 \u03bc\u03b5\u03bb\u03ac\u03bd\u03b9 3 \u03b5\u03c4\u03ce\u03bd.",
+        "hu": "Epson tintasug\u00e1r nyomtat\u00f3, 3 \u00e9v tint\u00e1val egy\u00fctt.",
+        "lv": "Epson tintes printeris ar 3 gadu tinti.",
+        "lt": "\"Epson\" ra\u0161alinis spausdintuvas su 3 met\u0173 ra\u0161alu.",
+        "pl": "Drukarka atramentowa Epson z 3 latami tuszu w zestawie.",
+        "ro": "Imprimant\u0103 inkjet Epson cu 3 ani de cerneal\u0103 inclus\u0103.",
+        "sr": "Epson inkjet \u0161tampa\u010d sa 3 godine mastila uklju\u010den."
     },
-    "generatedAt": "2026-02-10T12:22:57+00:00"
+    "generatedAt": "2026-02-10T13:52:43+00:00"
 }

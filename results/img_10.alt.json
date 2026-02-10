@@ -4,9 +4,27 @@
     "source": "public website",
     "altText": {
         "en": "Inkjet printer with ecotank ink cartridges.",
-        "jp": "\u30a8\u30b3\u30bf\u30f3\u30af\u30a4\u30f3\u30af\u30ab\u30fc\u30c8\u30ea\u30c3\u30b8\u4ed8\u304d\u306e\u30a4\u30f3\u30af\u30b8\u30a7\u30c3\u30c8\u30d7\u30ea\u30f3\u30bf\u30fc\u3002",
+        "de": "Tintenstrahldrucker mit Ecotank-Tintenpatronen.",
+        "fr": "Imprimante jet d\u2019encre avec cartouches d\u2019encre ecotank.",
+        "it": "Stampante inkjet con cartucce d'inchiostro ecotank.",
+        "es": "Impresora de inyecci\u00f3n de tinta con cartuchos de tinta ecotank.",
+        "pt": "Impressora jato de tinta com cartuchos de tinta ecotank.",
         "nl": "Inkjetprinter met Ecotank-inktcartridges.",
-        "fr": "Imprimante jet d\u2019encre avec cartouches d\u2019encre ecotank."
+        "da": "Bl\u00e6kprintere med Ecotank bl\u00e6kpatroner.",
+        "fi": "Mustesuihkutulostin, jossa on ecotank-mustekasetteja.",
+        "sv": "Bl\u00e4ckstr\u00e5leskrivare med Ecotank-bl\u00e4ckpatroner.",
+        "nb": "Blekkskriverskriver med Ecotank-blekkpatroner.",
+        "bg": "\u041c\u0430\u0441\u0442\u0438\u043b\u0435\u043d\u043e\u0441\u0442\u0440\u0443\u0435\u043d \u043f\u0440\u0438\u043d\u0442\u0435\u0440 \u0441 \u043c\u0430\u0441\u0442\u0438\u043b\u0435\u043d\u0438 \u043a\u0430\u0441\u0435\u0442\u0438 ecotank.",
+        "hr": "Inkjet pisa\u010d s Ecotank tintnim patronama.",
+        "cs": "Inkoustov\u00e1 tisk\u00e1rna s inkoustov\u00fdmi kazetami Ecotank.",
+        "et": "Tindiprinteriga koos ecotanki tindikassettidega.",
+        "el": "\u0395\u03ba\u03c4\u03c5\u03c0\u03c9\u03c4\u03ae\u03c2 inkjet \u03bc\u03b5 \u03b4\u03bf\u03c7\u03b5\u03af\u03b1 \u03bc\u03b5\u03bb\u03ac\u03bd\u03b7\u03c2 ecotank.",
+        "hu": "Tintasugaras nyomtat\u00f3 ecotank tintakartoncs\u00e1kkal.",
+        "lv": "Tintes printeris ar ecotank tintes kasetn\u0113m.",
+        "lt": "Ra\u0161alinis spausdintuvas su ecotank ra\u0161alo kaset\u0117mis.",
+        "pl": "Drukarka atramentowa z wk\u0142adami do atramentu Ecotank.",
+        "ro": "Imprimant\u0103 inkjet cu cartu\u0219e de cerneal\u0103 ecotank.",
+        "sr": "Inkjet \u0161tampa\u010d sa e\u0446otank kertrid\u017eima."
     },
-    "generatedAt": "2026-02-10T12:23:54+00:00"
+    "generatedAt": "2026-02-10T13:52:30+00:00"
 }

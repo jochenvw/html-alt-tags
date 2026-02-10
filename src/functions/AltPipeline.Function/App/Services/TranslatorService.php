@@ -52,6 +52,7 @@ class TranslatorService implements TextTranslator {
                 'gr' => 'el',  // Greek
                 'se' => 'sv',  // Swedish
                 'no' => 'nb',  // Norwegian Bokmål
+                'sr' => 'sr-Latn', // Serbian (Latin)
             ];
 
             foreach ($targetLanguages as $lang) {

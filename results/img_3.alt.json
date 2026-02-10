@@ -3,10 +3,28 @@
     "image": "img_3.png",
     "source": "public website",
     "altText": {
-        "en": "Compact ink tank printer in black Epson EcoTank L3560.",
-        "jp": "\u9ed2\u306e\u30b3\u30f3\u30d1\u30af\u30c8\u30a4\u30f3\u30af\u30bf\u30f3\u30af\u30d7\u30ea\u30f3\u30bf\u30fc Epson EcoTank L3560\u3002",
-        "nl": "Compacte inkttankprinter in zwart Epson EcoTank L3560.",
-        "fr": "Imprimante compacte \u00e0 encre en noir Epson EcoTank L3560."
+        "en": "Compact ink tank printer in home office setting.",
+        "de": "Drucker mit kompaktem Tintenbeh\u00e4lter im Homeoffice-Umfeld.",
+        "fr": "Imprimante compacte \u00e0 encre dans un bureau \u00e0 domicile.",
+        "it": "Stampante compatta per serbatoio d'inchiostro in un ambiente di home office.",
+        "es": "Impresora compacta para tanque de tinta en un entorno de oficina en casa.",
+        "pt": "Impressora compacta de tanque de tinta em ambiente de escrit\u00f3rio em casa.",
+        "nl": "Compacte inkttankprinter in een thuiskantooromgeving.",
+        "da": "Kompakt bl\u00e6kbeholderprinter i hjemmekontor.",
+        "fi": "Kompakti mustes\u00e4ili\u00f6n tulostin kotitoimistossa.",
+        "sv": "Kompakt bl\u00e4cktankskrivare i hemmakontor.",
+        "nb": "Kompakt blekktankskriver i hjemmekontor.",
+        "bg": "\u041a\u043e\u043c\u043f\u0430\u043a\u0442\u0435\u043d \u043f\u0440\u0438\u043d\u0442\u0435\u0440 \u0441 \u043c\u0430\u0441\u0442\u0438\u043b\u0435\u043d \u0440\u0435\u0437\u0435\u0440\u0432\u043e\u0430\u0440 \u0432 \u0434\u043e\u043c\u0430\u0448\u043d\u0438 \u043e\u0444\u0438\u0441 \u043e\u0431\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0438.",
+        "hr": "Kompaktni printer s tintom u ku\u0107nom uredu.",
+        "cs": "Kompaktn\u00ed tisk\u00e1rna s inkoustovou n\u00e1dr\u017e\u00ed v dom\u00e1c\u00ed kancel\u00e1\u0159i.",
+        "et": "Kompaktne tinditanki printer kodukontori keskkonnas.",
+        "el": "\u03a3\u03c5\u03bc\u03c0\u03b1\u03b3\u03ae\u03c2 \u03b5\u03ba\u03c4\u03c5\u03c0\u03c9\u03c4\u03ae\u03c2 \u03bc\u03b5 \u03b4\u03bf\u03c7\u03b5\u03af\u03b1 \u03bc\u03b5\u03bb\u03b1\u03bd\u03b9\u03bf\u03cd \u03c3\u03b5 \u03c0\u03b5\u03c1\u03b9\u03b2\u03ac\u03bb\u03bb\u03bf\u03bd \u03bf\u03b9\u03ba\u03b9\u03b1\u03ba\u03bf\u03cd \u03b3\u03c1\u03b1\u03c6\u03b5\u03af\u03bf\u03c5.",
+        "hu": "Kompakt tintatart\u00e1ly nyomtat\u00f3 otthoni irod\u00e1ban.",
+        "lv": "Kompakts tintes tvertnes printeris m\u0101jas biroja vid\u0113.",
+        "lt": "Kompakti\u0161kas ra\u0161alo talpyklos spausdintuvas nam\u0173 biure.",
+        "pl": "Kompaktowa drukarka z atramentem w domowym biurze.",
+        "ro": "Imprimant\u0103 compact\u0103 pentru rezervor de cerneal\u0103 \u00eentr-un birou de acas\u0103.",
+        "sr": "Kompaktan \u0161tampa\u010d sa mastilom u ku\u0107noj kancelariji."
     },
-    "generatedAt": "2026-02-10T12:22:59+00:00"
+    "generatedAt": "2026-02-10T13:54:27+00:00"
 }

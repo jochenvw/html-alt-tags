@@ -153,37 +153,80 @@ Alt-text quality is enforced through the AI model's system prompt rather than th
 
 ---
 
-## Cost Estimate
+## Cost breakdown (upper bound, conservative)
 
-The estimates below assume **10,000 images processed per month** in the **Sweden Central** region. Each image generates approximately one AI description request (≈500 input tokens, ≈100 output tokens) and one translation request (≈100 characters × 3 languages). Actual costs will vary based on image volume, description complexity, and number of target languages.
+This is a planning estimate, not an Azure quote. Use the [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/) to validate before purchasing.
 
-| Component                  | Pricing Model                        | Estimated Monthly Cost | Notes                                          |
-|----------------------------|--------------------------------------|------------------------|-------------------------------------------------|
-| Azure Blob Storage         | $0.0184/GB (hot) + operations        | **~$1–2**              | Small volume; mostly small images + JSON files |
-| Azure Event Grid           | $0.60 per million operations         | **< $1**               | 10K events is well under 1M                    |
-| Azure Container Apps       | vCPU/s + GiB/s (consumption)         | **~$5–15**             | 0.25 vCPU × 0.5 GiB; scales with demand       |
-| Azure AI Foundry (Phi-4)   | Per 1K tokens (input + output)       | **~$5–20**             | Depends on model pricing tier; SLM is efficient|
-| Azure AI Translator        | $10 per million characters           | **~$1–3**              | ~300 chars × 10K images = 3M chars             |
-| Azure Computer Vision      | $1 per 1,000 transactions            | **< $1**               | Fallback only; rarely used in normal operation |
-| Azure Container Registry   | $5/month (Basic tier)                | **$5**                 | Fixed monthly rate                             |
-| Azure Log Analytics        | $2.76 per GB ingested                | **~$1–3**              | ~0.5–1 GB logs per month at this volume        |
-| Managed Identity           | Free                                 | **$0**                 | No cost for identity itself                    |
-| **Total (estimated)**      |                                      | **~$20–50/month**      | At 10K images/month                            |
+**Assumptions:**
+- **Captioning model:** Phi-4-multimodal-instruct
+- **Token upper bound per image:** 4,000 total (≈90% input / 10% output); measured average is 3,243, we round up for safety
+- **Model unit prices:** $0.00008 per 1K input tokens; $0.00032 per 1K output tokens
+- **Translation:** Azure AI Translator S1 at $10.00 per 1M characters
+- **Translation length:** 200 characters per language per image
+- **Languages:** 21 per image
+- **ACA hot replica (consumption, 1 vCPU / 1 GiB):** $15.77/month
+- **Event Grid + Blob Storage:** $0.02 per 1K images (conservative upper bound for ops + small JSON payloads)
 
-### Scaling Notes
+---
 
-- **100K images/month**: Expect ~$150–400/month. Container Apps auto-scales; AI token costs dominate.
-- **1M images/month**: Expect ~$1,200–3,000/month. Consider reserved capacity for Foundry and negotiated pricing.
-- The single largest variable cost is **AI Foundry (Phi-4) token consumption**. Using an SLM instead of GPT-4 reduces this cost by approximately 5–10×.
+### Per 1,000 images
 
-### Cost Optimisation Levers
+- **Translator:** 200 chars/image × 21 languages = 4,200 chars/image → 4.2M chars per 1K → **$42.00**
+- **Phi-4 captioning (4K tokens/image):**
+  - Input: 3,600K tokens × $0.00008 = **$0.29**
+  - Output: 400K tokens × $0.00032 = **$0.13**
+  - Subtotal: **$0.42**
+- **Event Grid + Storage:** **$0.02**
+- **ACA (two scenarios):**
+  - **(A) High volume (≥11K images/month):** $15.77 ÷ 11 = **$1.43** per 1K
+  - **(B) Low volume (~1K images/month):** **$15.77** per 1K
 
-- **Reduce languages**: Each additional translation language adds ~$0.10 per 1,000 images.
-- **Batch processing**: Process images in off-peak hours to minimise Container Apps active time.
-- **Storage lifecycle**: Add a lifecycle policy to auto-delete processed images from ingest after 30 days.
-- **Reserved pricing**: For predictable volumes, Azure reservations can reduce Container Apps and AI costs.
+**Totals per 1,000 images:**
+- **(A) High-volume scenario:** $42.00 + $0.42 + $1.43 + $0.02 = **$43.87** → **$43.87**
+- **(B) Low-volume scenario:** $42.00 + $0.42 + $15.77 + $0.02 = **$58.21** → **$58.21**
 
-> **Disclaimer:** These estimates are approximate and based on publicly available Azure pricing as of early 2026. Use the [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) for precise quotes based on your expected usage. AI Foundry model pricing may vary by deployment and agreement.
+---
+
+### Per 11,000 images (monthly)
+
+- **Translator:** 4.2M chars × 11 = 46.2M chars → **$462.00**
+- **Phi-4 captioning:** $0.42 × 11 = **$4.62**
+- **ACA hot replica:** **$15.77** (fixed monthly cost)
+- **Event Grid + Storage:** $0.02 × 11 = **$0.22**
+
+**Total (11,000 images in one month):** $462.00 + $4.62 + $15.77 + $0.22 = **$482.61** → **$482.61**
+
+---
+
+### Notes & disclaimers
+
+- **Translation dominates cost:** It accounts for ~95% of variable expenses. Reducing languages or average character length has the highest cost impact.
+- **ACA cost varies by volume:** If you process fewer than 11K images/month, the fixed $15.77 replica cost dominates, making per-image cost much higher. Consider **scaling to 0 replicas at rest** for infrequent workloads (pay only vCPU/s during active processing).
+- **Event Grid is metered by 64 KB ops:** Retries and fan-out (e.g., copying approved images to public) increase operation count. Our estimate assumes one event per image.
+- **Phi-4 model inference is negligible** (~$0.42 per 1K images) compared to translation. Switching to a larger model (GPT-4, GPT-4o) would increase this 8–15 times.
+- **Validate with your Azure account team:** Enterprise agreements, reservations, and regional pricing variations may reduce actual costs. Test with real workloads before committing.
+
+---
+
+Machine-readable cost constants (for automation):
+
+```
+PHI4_INPUT_PRICE_PER_1M_TOKENS = 0.000080  # USD
+PHI4_OUTPUT_PRICE_PER_1M_TOKENS = 0.000320  # USD
+PHI4_TOKENS_PER_IMAGE = 4000
+PHI4_INPUT_PCT = 0.90
+PHI4_OUTPUT_PCT = 0.10
+
+TRANSLATOR_PRICE_PER_1M_CHARS = 10.00  # USD
+TRANSLATOR_CHARS_PER_LANGUAGE = 200
+TRANSLATOR_LANGUAGES = 21
+
+ACA_PRICE_PER_MONTH = 15.77  # USD, hot replica (1 vCPU / 1 GiB)
+ACA_AMORTIZE_AT_IMAGES_PER_MONTH = 11000
+
+EVENT_GRID_STORAGE_PRICE_PER_1K_IMAGES = 0.02  # USD
+```
+
 
 ---
 

@@ -70,6 +70,7 @@ class PipelineOrchestrator {
             );
 
             $altText = $describerResult['alt_en'] ?? '';
+            $tokenUsage = $describerResult['tokenUsage'] ?? null;
 
             // Step 5: Translate
             $normalizedLanguages = array_map('strtolower', array_map(fn($l) => substr($l, 0, 2), $languages));
@@ -93,6 +94,7 @@ class PipelineOrchestrator {
             $logger->info("Pipeline complete", [
                 'blob' => $blobName,
                 'languages' => array_keys($altTexts),
+                'tokenUsage' => $tokenUsage,
             ]);
 
             return [

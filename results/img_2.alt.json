@@ -3,10 +3,28 @@
     "image": "img_2.png",
     "source": "public website",
     "altText": {
-        "en": "Hand refilling ink tank with ink bottles.",
-        "jp": "\u30a4\u30f3\u30af\u74f6\u3067\u30a4\u30f3\u30af\u30bf\u30f3\u30af\u3092\u624b\u4f5c\u696d\u3067\u88dc\u5145\u3057\u307e\u3057\u3087\u3046\u3002",
-        "nl": "Inkttank met de hand bijvullen met inktflessen.",
-        "fr": "Rechargez le r\u00e9servoir d\u2019encre \u00e0 la main avec des bouteilles d\u2019encre."
+        "en": "Person refilling ink tank on printer.",
+        "de": "Person f\u00fcllt den Tintentank am Drucker nach.",
+        "fr": "Une personne remplissant le r\u00e9servoir d\u2019encre sur l\u2019imprimante.",
+        "it": "Persona che ricarica il serbatoio d'inchiostro sulla stampante.",
+        "es": "Persona rellenando el tanque de tinta en la impresora.",
+        "pt": "Pessoa reabastecendo o tanque de tinta na impressora.",
+        "nl": "Persoon vult de inkttank bij op de printer.",
+        "da": "Person, der fylder bl\u00e6ktank p\u00e5 printeren.",
+        "fi": "Henkil\u00f6 t\u00e4ytt\u00e4\u00e4 mustes\u00e4ili\u00f6n tulostimella.",
+        "sv": "Person fyller p\u00e5 bl\u00e4cktank p\u00e5 skrivaren.",
+        "nb": "Person fyller p\u00e5 blekktank p\u00e5 skriveren.",
+        "bg": "\u0427\u043e\u0432\u0435\u043a, \u043a\u043e\u0439\u0442\u043e \u043f\u0440\u0435\u0437\u0430\u0440\u0435\u0436\u0434\u0430 \u043c\u0430\u0441\u0442\u0438\u043b\u043e\u0442\u043e \u043d\u0430 \u043f\u0440\u0438\u043d\u0442\u0435\u0440\u0430.",
+        "hr": "Osoba koja puni spremnik tinte na printeru.",
+        "cs": "\u010clov\u011bk dopl\u0148uje inkoustovou n\u00e1dr\u017e na tisk\u00e1rn\u011b.",
+        "et": "Inimene t\u00e4idab tindipaagi printeris.",
+        "el": "\u0386\u03c4\u03bf\u03bc\u03bf \u03c0\u03bf\u03c5 \u03be\u03b1\u03bd\u03b1\u03b3\u03b5\u03bc\u03af\u03b6\u03b5\u03b9 \u03c4\u03bf \u03b4\u03bf\u03c7\u03b5\u03af\u03bf \u03bc\u03b5\u03bb\u03ac\u03bd\u03b7\u03c2 \u03c3\u03c4\u03bf\u03bd \u03b5\u03ba\u03c4\u03c5\u03c0\u03c9\u03c4\u03ae.",
+        "hu": "Szem\u00e9ly t\u00f6lti a tintatart\u00e1lyt nyomtat\u00f3n.",
+        "lv": "Persona, kas uzpilda tintes tvertni printer\u012b.",
+        "lt": "Asmuo pildo spausdintuvo ra\u0161alo talpykl\u0105.",
+        "pl": "Osoba uzupe\u0142niaj\u0105ca zbiornik atramentu na drukarce.",
+        "ro": "O persoan\u0103 reumple rezervorul de cerneal\u0103 de la imprimant\u0103.",
+        "sr": "Osoba koja dopunjuje rezervoar sa mastilom na \u0161tampa\u010du."
     },
-    "generatedAt": "2026-02-10T12:23:42+00:00"
+    "generatedAt": "2026-02-10T13:52:34+00:00"
 }

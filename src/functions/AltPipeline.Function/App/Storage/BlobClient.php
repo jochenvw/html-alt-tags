@@ -279,6 +279,7 @@ class BlobClient {
                     "Authorization: Bearer {$token}",
                     "x-ms-copy-source: {$sourceUrl}",
                     "x-ms-version: 2021-08-06",
+                    "Content-Length: 0",
                 ],
                 CURLOPT_CUSTOMREQUEST => 'PUT',
                 CURLOPT_RETURNTRANSFER => true,

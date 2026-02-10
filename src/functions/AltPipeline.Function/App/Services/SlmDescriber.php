@@ -63,19 +63,26 @@ class SlmDescriber implements ImageDescriber {
             );
 
             // Call Azure OpenAI with image
-            $response = $this->callOpenAI($systemPrompt, $userPrompt, $sasUrl);
+            $apiResult = $this->callOpenAI($systemPrompt, $userPrompt, $sasUrl);
 
             // Parse response - extract JSON robustly
-            $result = $this->extractJson($response);
+            $result = $this->extractJson($apiResult['content']);
 
             $altEn = $result['alt_en'] ?? '';
-            $this->logger->info("SlmDescriber result for {$blobName}", ['alt_en' => $altEn]);
+            $tokenUsage = $apiResult['tokenUsage'];
 
-            return ['alt_en' => $altEn];
+            $this->logger->info("SlmDescriber result for {$blobName}", [
+                'alt_en' => $altEn,
+                'prompt_tokens' => $tokenUsage['prompt_tokens'],
+                'completion_tokens' => $tokenUsage['completion_tokens'],
+                'total_tokens' => $tokenUsage['total_tokens'],
+            ]);
+
+            return ['alt_en' => $altEn, 'tokenUsage' => $tokenUsage];
 
         } catch (\Exception $e) {
             $this->logger->error("SlmDescriber error: " . $e->getMessage());
-            return ['alt_en' => ''];
+            return ['alt_en' => '', 'tokenUsage' => ['prompt_tokens' => 0, 'completion_tokens' => 0, 'total_tokens' => 0]];
         }
     }
 
@@ -303,7 +310,12 @@ PROMPT;
         return $text;
     }
 
-    private function callOpenAI(string $systemPrompt, string $userPrompt, ?string $sasUrl = null): string {
+    /**
+     * Call Azure OpenAI and return content + token usage.
+     *
+     * @return array{content: string, tokenUsage: array{prompt_tokens: int, completion_tokens: int, total_tokens: int}}
+     */
+    private function callOpenAI(string $systemPrompt, string $userPrompt, ?string $sasUrl = null): array {
         // Construct endpoint URL for Azure AI Foundry (OpenAI-compatible)
         $url = "{$this->endpoint}/openai/deployments/{$this->deploymentName}/chat/completions?api-version=2024-05-01-preview";
 
@@ -377,8 +389,22 @@ PROMPT;
         $data = json_decode($response, true);
         $content = $data['choices'][0]['message']['content'] ?? '';
 
+        // Extract token usage from the API response
+        $tokenUsage = [
+            'prompt_tokens'     => $data['usage']['prompt_tokens'] ?? 0,
+            'completion_tokens' => $data['usage']['completion_tokens'] ?? 0,
+            'total_tokens'      => $data['usage']['total_tokens'] ?? 0,
+        ];
+
+        $this->logger->info("Foundry token usage", [
+            'deployment'        => $this->deploymentName,
+            'prompt_tokens'     => $tokenUsage['prompt_tokens'],
+            'completion_tokens' => $tokenUsage['completion_tokens'],
+            'total_tokens'      => $tokenUsage['total_tokens'],
+        ]);
+
         $this->logger->debug("Foundry raw response", ['content' => substr($content, 0, 200)]);
 
-        return $content;
+        return ['content' => $content, 'tokenUsage' => $tokenUsage];
     }
 }

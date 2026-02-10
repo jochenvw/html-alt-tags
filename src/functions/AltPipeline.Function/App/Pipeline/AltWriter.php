@@ -58,7 +58,7 @@ class AltWriter {
             $languages = implode(',', array_keys($altJson['altText'] ?? ['en' => '']));
             $tags = [
                 'processed' => 'true',
-                'alt.v' => '1',
+                'altv' => '1',
                 'langs' => $languages,
             ];
 

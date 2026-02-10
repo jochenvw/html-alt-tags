@@ -3,10 +3,28 @@
     "image": "img_4.png",
     "source": "public website",
     "altText": {
-        "en": "Ink tank refill bottles in various colors.",
-        "jp": "\u3055\u307e\u3056\u307e\u306a\u8272\u306e\u30a4\u30f3\u30af\u30bf\u30f3\u30af\u88dc\u5145\u30dc\u30c8\u30eb\u3002",
-        "nl": "Inkttankflessen in verschillende kleuren.",
-        "fr": "Bouteilles de recharge pour r\u00e9servoir d\u2019encre de diff\u00e9rentes couleurs."
+        "en": "Ink tank refill bottles with color-coded caps and black ink bottle included.",
+        "de": "Tintentank-Nachf\u00fcllflaschen mit farbcodierten Deckeln und schwarzer Tintenflasche enthalten sind.",
+        "fr": "Bouteilles de remplissage pour r\u00e9servoir d\u2019encre avec bouchons cod\u00e9s par couleur et bouteille d\u2019encre noire incluses.",
+        "it": "Bottiglie di ricarica per serbatoi d'inchiostro con tappi colorati e bottiglia nera incluse.",
+        "es": "Se incluyen botellas de recarga para tanques de tinta con tapones codificados por colores y botella negra de tinta.",
+        "pt": "Inclui frascos de recarga para tanques de tinta com tampas codificadas por cores e frasco preto de tinta.",
+        "nl": "Inkttank-navulflessen met kleurgecodeerde doppen en een zwarte inktfles inbegrepen.",
+        "da": "Bl\u00e6kbeholderflasker med farvekodede l\u00e5g og sort bl\u00e6kflaske inkluderet.",
+        "fi": "Mustepullot, joissa on v\u00e4rikoodatut korkit ja musta mustepullo.",
+        "sv": "Bl\u00e4cktanksflaskor med f\u00e4rgkodade korkar och svart bl\u00e4ckflaska ing\u00e5r.",
+        "nb": "Blekktankflasker med fargekodede korker og svart blekkflaske inkludert.",
+        "bg": "\u0411\u0443\u0442\u0438\u043b\u043a\u0438 \u0437\u0430 \u043f\u044a\u043b\u043d\u0435\u043d\u0435 \u043d\u0430 \u043c\u0430\u0441\u0442\u0438\u043b\u0435\u043d\u0438 \u0440\u0435\u0437\u0435\u0440\u0432\u043e\u0430\u0440\u0438 \u0441 \u0446\u0432\u0435\u0442\u043e\u0432\u0438 \u043a\u0430\u043f\u0430\u0447\u043a\u0438 \u0438 \u0447\u0435\u0440\u043d\u0438 \u043c\u0430\u0441\u0442\u0438\u043b\u0435\u043d\u0438 \u0431\u0443\u0442\u0438\u043b\u043a\u0438.",
+        "hr": "Bo\u010dice za punjenje u spremniku s tintom s \u010depovima ozna\u010denim bojama i crnom bo\u010dicom za tintu uklju\u010dene.",
+        "cs": "Lahvi\u010dky s dopl\u0148ov\u00e1n\u00edm inkoustu s barevn\u011b ozna\u010den\u00fdmi v\u00ed\u010dky a \u010dernou lahvi\u010dkou s inkoustem.",
+        "et": "Tindipaagi t\u00e4itepudelid v\u00e4rvikoodiga korkidega ja musta tindipudeliga kaasas.",
+        "el": "\u03a0\u03b5\u03c1\u03b9\u03bb\u03b1\u03bc\u03b2\u03ac\u03bd\u03bf\u03bd\u03c4\u03b1\u03b9 \u03c6\u03b9\u03ac\u03bb\u03b5\u03c2 \u03b1\u03bd\u03b1\u03c0\u03bb\u03ae\u03c1\u03c9\u03c3\u03b7\u03c2 \u03b4\u03bf\u03c7\u03b5\u03af\u03c9\u03bd \u03bc\u03b5\u03bb\u03ac\u03bd\u03b7\u03c2 \u03bc\u03b5 \u03ba\u03b1\u03c0\u03ac\u03ba\u03b9\u03b1 \u03bc\u03b5 \u03c7\u03c1\u03c9\u03bc\u03b1\u03c4\u03b9\u03ba\u03ae \u03ba\u03c9\u03b4\u03b9\u03ba\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7 \u03ba\u03b1\u03b9 \u03bc\u03b1\u03cd\u03c1\u03b7 \u03c6\u03b9\u03ac\u03bb\u03b7 \u03bc\u03b5\u03bb\u03ac\u03bd\u03b7\u03c2.",
+        "hu": "Tintatart\u00e1ly \u00fajrat\u00f6lt\u00e9si palackok sz\u00ednk\u00f3dolt kupakokkal \u00e9s fekete tintaos palackokkal egy\u00fctt.",
+        "lv": "Iek\u013cautas tintes tvertnes uzpildes pudeles ar kr\u0101su kod\u0113tiem v\u0101ci\u0146iem un melnas tintes pudeli.",
+        "lt": "Pridedami ra\u0161alo talpykl\u0173 papildymo buteliukai su spalvotais dangteliais ir juodo ra\u0161alo buteliuku.",
+        "pl": "Butelki do tanku z atramentem z kolorowymi kapslami oraz czarn\u0105 butelk\u0105 z atramentem w zestawie.",
+        "ro": "Sticle de reumplere pentru rezervoarele de cerneal\u0103 cu capace codificate pe culori \u0219i sticlu\u021b\u0103 neagr\u0103 de cerneal\u0103 incluse.",
+        "sr": "Bo\u010dice za punjenje rezervoara sa mastilom sa poklopcima u boji i bo\u010dicom sa crnim mastilom."
     },
-    "generatedAt": "2026-02-10T12:22:57+00:00"
+    "generatedAt": "2026-02-10T13:52:40+00:00"
 }

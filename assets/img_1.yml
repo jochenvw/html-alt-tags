@@ -2,9 +2,27 @@ asset: img_1.png
 source: public website
 languages:
   - EN
-  - JP
-  - NL
+  - DE
   - FR
+  - IT
+  - ES
+  - PT
+  - NL
+  - DA
+  - FI
+  - SV
+  - NB
+  - BG
+  - HR
+  - CS
+  - ET
+  - EL
+  - HU
+  - LV
+  - LT
+  - PL
+  - RO
+  - SR
 description: |
   Epson EcoTank L3560 is a multifunction A4 inkjet printer designed for home
   and small office use. Manufactured by Epson, a global imaging and printing
